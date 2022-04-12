@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">allowance</string>
+    <string name="cat_all">전체</string>
+    <string name="cat_univ">대학 전시회</string>
+    <string name="cat_ind">개인 전시회</string>
+    <string name="cat_else">기타</string>
+</resources>
