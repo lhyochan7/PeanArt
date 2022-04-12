@@ -1,14 +1,18 @@
 package com.example.PeanArt;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+import android.view.View;
 
-public class SignActivity extends AppCompatActivity {
+public class Recomendation extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.sign_in);
+        setContentView(R.layout.recomendation);
+    }
+
+    public void rcmd(View view) {
+
     }
 }
