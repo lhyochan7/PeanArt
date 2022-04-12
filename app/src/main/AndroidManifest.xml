@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Allowance">
         <activity
+            android:name=".LikeList"
+            android:exported="false" />
+        <activity
+            android:name=".AiResult"
+            android:exported="false" />
+        <activity
             android:name=".SignActivity"
             android:exported="false" />
         <activity
