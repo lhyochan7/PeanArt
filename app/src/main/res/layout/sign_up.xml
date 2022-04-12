@@ -10,7 +10,7 @@
     android:background="@color/mainbg"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".SignActivity">
+    tools:context=".SignUp">
 
     <ImageView
         android:id="@+id/logoIMG"
@@ -93,11 +93,12 @@
         android:layout_height="57dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        android:text="@string/sign_in"
         android:backgroundTint="@color/white"
+        android:onClick="sign"
+        android:text="@string/sign_in"
         android:textColor="@color/mainblue"
         android:textSize="20sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
 
 </LinearLayout>
