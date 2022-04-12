@@ -1,9 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bgLAY"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignActivity">
+    android:background="#F5F5F5"
+    tools:context=".SignActivity"
+    android:gravity="center"
+    android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:id="@+id/logoIMG"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        app:srcCompat="@drawable/logo" />
+
+    <EditText
+        android:id="@+id/usernameETXT"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/border"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/username"
+        android:textColor="#303481"
+        android:textSize="24sp" />
+
+    <EditText
+        android:id="@+id/nicknameETXT"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="null"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/nickname"
+        android:textColor="#303481"
+        android:textSize="24sp" />
+
+    <EditText
+        android:id="@+id/pwdETXT"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="null"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:text="@string/pwd"
+        android:textColor="#303481"
+        android:textSize="24sp" />
+
+    <EditText
+        android:id="@+id/emailETXT"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="null"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/email"
+        android:textColor="#303481"
+        android:textSize="24sp" />
+
+</LinearLayout>
