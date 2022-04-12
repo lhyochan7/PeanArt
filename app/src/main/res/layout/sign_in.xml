@@ -5,7 +5,7 @@
     android:id="@+id/bgLAY"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5"
+    android:background="@color/mainbg"
     tools:context=".SignActivity"
     android:gravity="center"
     android:orientation="vertical">
@@ -27,9 +27,14 @@
         android:background="@drawable/border"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="@string/username"
-        android:textColor="#303481"
-        android:textSize="24sp" />
+        android:padding="10dp"
+        android:hint="@string/username"
+        android:textColorHint="#303481"
+        android:textSize="24sp"
+        android:drawableStart="@drawable/profile_resize"
+        android:drawablePadding="5dp"
+        />
+
 
     <EditText
         android:id="@+id/nicknameETXT"
@@ -37,12 +42,15 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
-        android:background="null"
+        android:background="@drawable/border"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="@string/nickname"
-        android:textColor="#303481"
-        android:textSize="24sp" />
+        android:padding="10dp"
+        android:hint="@string/nickname"
+        android:textColorHint="#303481"
+        android:textSize="24sp"
+        android:drawableStart="@drawable/profile_resize"
+        android:drawablePadding="5dp"/>
 
     <EditText
         android:id="@+id/pwdETXT"
@@ -50,12 +58,16 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
-        android:background="null"
+        android:background="@drawable/border"
         android:ems="10"
         android:inputType="textPassword"
-        android:text="@string/pwd"
-        android:textColor="#303481"
-        android:textSize="24sp" />
+        android:padding="10dp"
+        android:paddingStart="15dp"
+        android:hint="@string/pwd"
+        android:textColorHint="#303481"
+        android:textSize="24sp"
+        android:drawableStart="@drawable/pwd_resize"
+        android:drawablePadding="10dp"/>
 
     <EditText
         android:id="@+id/emailETXT"
@@ -63,11 +75,17 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
-        android:background="null"
+        android:background="@drawable/border"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="@string/email"
-        android:textColor="#303481"
-        android:textSize="24sp" />
+        android:padding="10dp"
+        android:paddingStart="15dp"
+        android:hint="@string/email"
+        android:textColorHint="#303481"
+        android:textSize="24sp"
+        android:drawableStart="@drawable/mail_resize"
+        android:drawablePadding="5dp"/>
+
+
 
 </LinearLayout>
