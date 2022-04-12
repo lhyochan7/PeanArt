@@ -9,4 +9,11 @@
     <string name="pwd">PASSWORD</string>
     <string name="email">E-MAIL</string>
 
+    <string name="gallery_name">전시회 이름</string>
+    <string name="gallery_location">전시회 장소</string>
+    <string name="gallery_date">전시 기간</string>
+    <string name="gallery_description">상세 설명</string>
+    <string name="gallery_register">등록</string>
+
+
 </resources>

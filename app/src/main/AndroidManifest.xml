@@ -10,10 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Allowance">
         <activity
-            android:name=".SignActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainPage"
+            android:name="com.example.PeanArt.MainPage"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
