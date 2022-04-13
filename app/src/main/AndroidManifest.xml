@@ -10,11 +10,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Allowance">
         <activity
+            android:name=".LikeList"
+            android:exported="false" />
+        <activity
+            android:name=".AiResult"
+            android:exported="false" />
+        <activity
+            android:name=".Recomendation"
+            android:exported="false" />
+        <activity
             android:name=".SignActivity"
             android:exported="false" />
         <activity
             android:name=".MainPage"
-            android:exported="true">
+            android:exported="false" />
+        <activity
+            android:name=".SignUp"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
