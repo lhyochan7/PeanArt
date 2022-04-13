@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.PeanArt">
+    package="com.example.PeanArt" >
 
     <application
         android:allowBackup="true"
@@ -16,11 +16,17 @@
             android:name=".AiResult"
             android:exported="false" />
         <activity
+            android:name=".Recomendation"
+            android:exported="false" />
+        <activity
             android:name=".SignActivity"
             android:exported="false" />
         <activity
             android:name=".MainPage"
-            android:exported="true">
+            android:exported="false" />
+        <activity
+            android:name=".SignUp"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
