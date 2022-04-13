@@ -4,4 +4,10 @@
     <string name="cat_univ">대학 전시회</string>
     <string name="cat_ind">개인 전시회</string>
     <string name="cat_else">기타</string>
+    <string name="username">USERNAME</string>
+    <string name="nickname">NICK NAME</string>
+    <string name="pwd">PASSWORD</string>
+    <string name="email">E-MAIL</string>
+    <string name="sign_in">회원 등록</string>
+
 </resources>
