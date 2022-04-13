@@ -3,15 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/drawable/border.xml" value="0.45" />
-        <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/drawable/ic_launcher_background.xml" value="0.45" />
-        <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/drawable/mail_resize.xml" value="0.359" />
-        <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/drawable/profile.xml" value="0.359" />
-        <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/drawable/pwd_resize.xml" value="0.359" />
-        <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/layout/border.xml" value="0.4067028985507246" />
-        <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/layout/recomendation.xml" value="0.2692502532928065" />
-        <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/layout/sign_in.xml" value="0.2889733840304182" />
-        <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/layout/sign_up.xml" value="0.2692502532928065" />
+        <entry key="..\:/Users/HUSTAR23/AndroidStudioProjects/PeanArt/app/src/main/res/drawable/mail_resize.xml" value="0.4185" />
+        <entry key="..\:/Users/HUSTAR23/AndroidStudioProjects/PeanArt/app/src/main/res/drawable/profile_resize.xml" value="0.4185" />
+        <entry key="..\:/Users/HUSTAR23/AndroidStudioProjects/PeanArt/app/src/main/res/layout/activity_main.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/HUSTAR23/AndroidStudioProjects/PeanArt/app/src/main/res/layout/activity_my_page.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/HUSTAR23/AndroidStudioProjects/PeanArt/app/src/main/res/layout/underbar.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/HUSTAR23/AndroidStudioProjects/PeanArt/app/src/main/res/menu/menu_bottomnavigationview.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/HUSTAR25/AndroidStudioProjects/PeanArt/app/src/main/res/layout/activity_main.xml" value="0.2734375" />
         <entry key="..\:/Users/HUSTAR25/AndroidStudioProjects/allowance/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.25" />
         <entry key="..\:/Users/HUSTAR25/AndroidStudioProjects/allowance/app/src/main/res/layout/activity_main.xml" value="0.33" />
       </map>
