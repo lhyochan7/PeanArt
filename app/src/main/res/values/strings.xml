@@ -9,5 +9,7 @@
     <string name="pwd">PASSWORD</string>
     <string name="email">E-MAIL</string>
     <string name="sign_in">회원 등록</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
