@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bgLAY"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    android:background="@color/mainbg"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".SignUp">
+
+    <ImageView
+        android:id="@+id/logoIMG"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="40dp"
+        app:srcCompat="@drawable/logo" />
+
+    <EditText
+        android:id="@+id/usernameETXT"
+        android:layout_width="300dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/border"
+        android:drawableStart="@drawable/profile_resize"
+        android:drawablePadding="5dp"
+        android:ems="10"
+        android:hint="@string/username"
+        android:inputType="textPersonName"
+        android:padding="10dp"
+        android:textColorHint="#303481"
+        android:textSize="20sp" />
+
+
+    <EditText
+        android:id="@+id/nicknameETXT"
+        android:layout_width="300dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/border"
+        android:drawableStart="@drawable/profile_resize"
+        android:drawablePadding="5dp"
+        android:ems="10"
+        android:hint="@string/nickname"
+        android:inputType="textPersonName"
+        android:padding="10dp"
+        android:textColorHint="#303481"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/pwdETXT"
+        android:layout_width="300dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/border"
+        android:drawableStart="@drawable/pwd_resize"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="@string/pwd"
+        android:inputType="textPassword"
+        android:padding="10dp"
+        android:paddingStart="15dp"
+        android:textColorHint="#303481"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/emailETXT"
+        android:layout_width="300dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/border"
+        android:drawableStart="@drawable/mail_resize"
+        android:drawablePadding="5dp"
+        android:ems="10"
+        android:hint="@string/email"
+        android:inputType="textPersonName"
+        android:padding="10dp"
+        android:paddingStart="15dp"
+        android:textColorHint="#303481"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/signBTN"
+        android:layout_width="300dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/white"
+        android:onClick="sign"
+        android:text="@string/sign_in"
+        android:textColor="@color/mainblue"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+
+</LinearLayout>
