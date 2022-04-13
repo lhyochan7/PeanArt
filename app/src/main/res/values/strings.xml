@@ -8,5 +8,6 @@
     <string name="nickname">NICK NAME</string>
     <string name="pwd">PASSWORD</string>
     <string name="email">E-MAIL</string>
+    <string name="sign_in">회원 등록</string>
 
 </resources>
