@@ -26,11 +26,6 @@
         android:textSize="24sp"
         android:textStyle="bold" />
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/aiResultImg" />
 
     <ImageView
         android:layout_width="350dp"
