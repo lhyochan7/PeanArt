@@ -5,13 +5,19 @@
       <map>
         <entry key="..\:/Users/HUSTAR25/AndroidStudioProjects/PeanArt/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.202" />
         <entry key="..\:/Users/HUSTAR25/AndroidStudioProjects/PeanArt/app/src/main/res/drawable/border.xml" value="0.2175" />
+        <entry key="..\:/Users/HUSTAR25/AndroidStudioProjects/PeanArt/app/src/main/res/drawable/profile_resize.xml" value="0.116" />
         <entry key="..\:/Users/HUSTAR25/AndroidStudioProjects/PeanArt/app/src/main/res/layout/activity_ai_result.xml" value="0.17806484295845998" />
-        <entry key="..\:/Users/HUSTAR25/AndroidStudioProjects/PeanArt/app/src/main/res/layout/activity_main.xml" value="0.5" />
+        <entry key="..\:/Users/HUSTAR25/AndroidStudioProjects/PeanArt/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/HUSTAR25/AndroidStudioProjects/PeanArt/app/src/main/res/layout/activity_main2.xml" value="0.17451874366767983" />
+        <entry key="..\:/Users/HUSTAR25/AndroidStudioProjects/PeanArt/app/src/main/res/layout/activity_my_page.xml" value="0.3342391304347826" />
         <entry key="..\:/Users/HUSTAR25/AndroidStudioProjects/PeanArt/app/src/main/res/layout/activity_register_gallery.xml" value="0.2" />
         <entry key="..\:/Users/HUSTAR25/AndroidStudioProjects/PeanArt/app/src/main/res/layout/fragment_dashboard.xml" value="0.17451874366767983" />
         <entry key="..\:/Users/HUSTAR25/AndroidStudioProjects/PeanArt/app/src/main/res/layout/fragment_home.xml" value="0.17451874366767983" />
+        <entry key="..\:/Users/HUSTAR25/AndroidStudioProjects/PeanArt/app/src/main/res/layout/main_fragment.xml" value="0.1875" />
+        <entry key="..\:/Users/HUSTAR25/AndroidStudioProjects/PeanArt/app/src/main/res/layout/recomendation.xml" value="0.2617753623188406" />
         <entry key="..\:/Users/HUSTAR25/AndroidStudioProjects/PeanArt/app/src/main/res/layout/sign_in.xml" value="0.1828125" />
+        <entry key="..\:/Users/HUSTAR25/AndroidStudioProjects/PeanArt/app/src/main/res/layout/underbar.xml" value="0.22282608695652173" />
+        <entry key="..\:/Users/HUSTAR25/AndroidStudioProjects/PeanArt/app/src/main/res/menu/menu_bottomnavigationview.xml" value="0.2972222222222222" />
         <entry key="..\:/Users/HUSTAR25/AndroidStudioProjects/allowance/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.25" />
         <entry key="..\:/Users/HUSTAR25/AndroidStudioProjects/allowance/app/src/main/res/layout/activity_main.xml" value="0.33" />
       </map>

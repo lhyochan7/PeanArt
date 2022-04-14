@@ -19,7 +19,7 @@
             android:name=".Login"
             android:exported="false" />
         <activity
-            android:name=".MainPage"
+            android:name=".Recomendation"
             android:exported="false" />
         <activity
             android:name=".MyPage"
@@ -31,8 +31,8 @@
             android:name=".SignUp"
             android:exported="false" />
         <activity
-            android:name=".Recomendation"
-            android:exported="true" >
+            android:name=".MainPage"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
