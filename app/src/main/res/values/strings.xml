@@ -17,6 +17,8 @@
     <string name="gallery_date">전시 기간</string>
     <string name="gallery_description">상세 설명</string>
     <string name="gallery_register">등록</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
     <string name="exhibition_visited">방문한 전시회</string>
