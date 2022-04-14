@@ -16,16 +16,22 @@
             android:name=".AiResult"
             android:exported="false" />
         <activity
+            android:name=".Login"
+            android:exported="false" />
+        <activity
+            android:name=".MyPage"
+            android:exported="false" />
+        <activity
             android:name=".Recomendation"
             android:exported="false" />
         <activity
-            android:name=".SignActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainPage"
+            android:name=".RegisterGallery"
             android:exported="false" />
         <activity
             android:name=".SignUp"
+            android:exported="false" />
+        <activity
+            android:name=".MainPage"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,6 +1,8 @@
 package com.example.PeanArt;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -28,7 +30,8 @@ public class Recomendation extends AppCompatActivity {
     public void rcmd(View view) {
         switch (view.getId()){
             case R.id.venusIMG:
-
+                Intent go_reco = new Intent(this, AiResult.class);
+                startActivity(go_reco);
         }
     }
 }
