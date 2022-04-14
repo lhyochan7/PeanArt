@@ -9,21 +9,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Allowance">
-        <activity
-            android:name=".LikeList"
-            android:exported="false" />
+
+
         <activity
             android:name=".AiResult"
             android:exported="false" />
+
         <activity
-            android:name=".Recomendation"
+            android:name=".Login"
             android:exported="false" />
-        <activity
-            android:name=".MainPage"
-            android:exported="false" />
-        <activity
-            android:name=".MyPage"
-            android:exported="false" />
+
         <activity
             android:name=".RegisterGallery"
             android:exported="false" />
@@ -31,8 +26,8 @@
             android:name=".SignUp"
             android:exported="false" />
         <activity
-            android:name=".Login"
-            android:exported="true" >
+            android:name=".FragmentsManager"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
