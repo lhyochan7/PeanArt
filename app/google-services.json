@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "225183941465",
+    "project_id": "peanart-b433a",
+    "storage_bucket": "peanart-b433a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:225183941465:android:c6021d9a65689f0bcb8248",
+        "android_client_info": {
+          "package_name": "com.example.PeanArt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "225183941465-8ns13egl6qm6l53mkvvag4fil7m0e2mg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYVU5mUcQcfHuRPtDSVYJWFq6A7T1LDis"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "225183941465-8ns13egl6qm6l53mkvvag4fil7m0e2mg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
