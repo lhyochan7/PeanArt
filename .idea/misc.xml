@@ -3,15 +3,28 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/HUSTAR25/AndroidStudioProjects/PeanArt/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.202" />
-        <entry key="..\:/Users/HUSTAR25/AndroidStudioProjects/PeanArt/app/src/main/res/drawable/border.xml" value="0.2175" />
-        <entry key="..\:/Users/HUSTAR25/AndroidStudioProjects/PeanArt/app/src/main/res/layout/activity_ai_result.xml" value="0.17806484295845998" />
-        <entry key="..\:/Users/HUSTAR25/AndroidStudioProjects/PeanArt/app/src/main/res/layout/activity_main.xml" value="0.5" />
-        <entry key="..\:/Users/HUSTAR25/AndroidStudioProjects/PeanArt/app/src/main/res/layout/activity_main2.xml" value="0.17451874366767983" />
-        <entry key="..\:/Users/HUSTAR25/AndroidStudioProjects/PeanArt/app/src/main/res/layout/activity_register_gallery.xml" value="0.2" />
-        <entry key="..\:/Users/HUSTAR25/AndroidStudioProjects/PeanArt/app/src/main/res/layout/fragment_dashboard.xml" value="0.17451874366767983" />
-        <entry key="..\:/Users/HUSTAR25/AndroidStudioProjects/PeanArt/app/src/main/res/layout/fragment_home.xml" value="0.17451874366767983" />
-        <entry key="..\:/Users/HUSTAR25/AndroidStudioProjects/PeanArt/app/src/main/res/layout/sign_in.xml" value="0.1828125" />
+        <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/drawable/border.xml" value="0.45" />
+        <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/drawable/ic_launcher_background.xml" value="0.45" />
+        <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/drawable/mail_resize.xml" value="0.359" />
+        <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/drawable/profile.xml" value="0.359" />
+        <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/drawable/profile_resize.xml" value="0.3175" />
+        <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/drawable/pwd_resize.xml" value="0.359" />
+        <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/drawable/rectanglebg.xml" value="0.3175" />
+        <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/layout/activity_ai_result.xml" value="0.2674772036474164" />
+        <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/layout/activity_like_list.xml" value="0.19972826086956522" />
+        <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/layout/activity_login.xml" value="0.1796116504854369" />
+        <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/layout/activity_main.xml" value="0.19972826086956522" />
+        <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/layout/activity_my_page.xml" value="0.19972826086956522" />
+        <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/layout/activity_register_gallery.xml" value="0.20878623188405798" />
+        <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/layout/border.xml" value="0.4067028985507246" />
+        <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/layout/fragment_main_page.xml" value="0.3145833333333333" />
+        <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/layout/fragment_manager.xml" value="0.3145833333333333" />
+        <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/layout/recomendation.xml" value="0.15611814345991562" />
+        <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/layout/sign_in.xml" value="0.2889733840304182" />
+        <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/layout/sign_up.xml" value="0.2692502532928065" />
+        <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/layout/test.xml" value="0.31354166666666666" />
+        <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/layout/underbar.xml" value="0.2388888888888889" />
+        <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/menu/menu_bottomnavigationview.xml" value="0.3145833333333333" />
         <entry key="..\:/Users/HUSTAR25/AndroidStudioProjects/allowance/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.25" />
         <entry key="..\:/Users/HUSTAR25/AndroidStudioProjects/allowance/app/src/main/res/layout/activity_main.xml" value="0.33" />
       </map>
