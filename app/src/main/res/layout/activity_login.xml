@@ -43,7 +43,7 @@
         android:backgroundTint="@color/white"
         android:text="로그인"
         android:textColor="@color/black"
-        android:onClick="test_sgin"/>
+        android:onClick="try_sign"/>
 
     <com.google.android.gms.common.SignInButton
         android:layout_width="match_parent"
