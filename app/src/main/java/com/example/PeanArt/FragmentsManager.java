@@ -8,6 +8,7 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -40,6 +41,8 @@ public class FragmentsManager<var> extends AppCompatActivity {
     private LikeList fragmentLike = new LikeList();
     private MyPage fragmentMypage = new MyPage();
 
+    String uid = null;
+
     private final String TAG = "FragManager";
 
     @Override
@@ -47,93 +50,54 @@ public class FragmentsManager<var> extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fragment);
 
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.mainLAY, fragmentMain).commitAllowingStateLoss();
-
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(new ItemSelectedListener());
 
-
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        String uid = null;
-
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
-            // Name, email address, and profile photo Url
-            String name = user.getDisplayName();
-            String email = user.getEmail();
-            Uri photoUrl = user.getPhotoUrl();
-
-            // Check if user's email is verified
-            boolean emailVerified = user.isEmailVerified();
+//            // Name, email address, and profile photo Url
+//            String name = user.getDisplayName();
+//            String email = user.getEmail();
+//            Uri photoUrl = user.getPhotoUrl();
+//
+//            // Check if user's email is verified
+//            boolean emailVerified = user.isEmailVerified();
 
             // The user's ID, unique to the Firebase project. Do NOT use this value to
             // authenticate with your backend server, if you have one. Use
             // FirebaseUser.getIdToken() instead.
             uid = user.getUid();
-            Log.i(TAG, "FIRESTORE DATA : " + name);
         }
 
-//        Map<String, Object> user = new HashMap<>();
-//        user.put("first", "test");
-//        user.put("second", "TEST");
-//        db.collection("user")
-//                .add(user)
-//                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-//                    @Override
-//                    public void onSuccess(DocumentReference documentReference) {
-////데이터가 성공적으로 추가되었을 때
-//                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-//                    }
-//                })
-//                .addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-////에러가 발생했을 때
-//                        Log.w(TAG, "Error ", e);
-//                    }
-//                });
-//
 
-        DocumentReference docRef = db.collection("user").document(uid);
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-                    } else {
-                        Log.d(TAG, "No such document");
-                    }
-                } else {
-                    Log.d(TAG, "get failed with ", task.getException());
-                }
-            }
-        });
-
-
-
+        Bundle bundle = new Bundle();
+        bundle.putString("uid", uid);
+        fragmentMain.setArguments(bundle);
+        fragmentRecommend.setArguments(bundle);
+        fragmentLike.setArguments(bundle);
+        fragmentMypage.setArguments(bundle);
+        Log.i(TAG, "UID : " + uid);
+        fragmentManager.beginTransaction()
+                .replace(R.id.mainLAY, fragmentMain)
+                .commit();
     }
 
     class ItemSelectedListener implements BottomNavigationView.OnNavigationItemSelectedListener {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-            FragmentTransaction transaction = fragmentManager.beginTransaction();
 
             switch (menuItem.getItemId()) {
                 case R.id.homeItem:
-                    transaction.replace(R.id.mainLAY, fragmentMain).commitAllowingStateLoss();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.mainLAY, fragmentMain).commit();
                     break;
                 case R.id.recommendItem:
-                    transaction.replace(R.id.mainLAY, fragmentRecommend).commitAllowingStateLoss();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.mainLAY, fragmentRecommend).commit();
                     break;
                 case R.id.likedItem:
-                    transaction.replace(R.id.mainLAY, fragmentLike).commitAllowingStateLoss();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.mainLAY, fragmentLike).commit();
                     break;
                 case R.id.myPageItem:
-                    transaction.replace(R.id.mainLAY, fragmentMypage).commitAllowingStateLoss();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.mainLAY, fragmentMypage).commit();
                     break;
             }
 
