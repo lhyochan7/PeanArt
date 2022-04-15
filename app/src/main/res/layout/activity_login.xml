@@ -24,7 +24,7 @@
         android:layout_margin="20dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="email" />
+        android:hint="email" />
 
     <EditText
         android:id="@+id/edit_pass"
@@ -32,8 +32,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:ems="10"
-        android:inputType="numberPassword"
-        android:text="Name" />
+        android:inputType="textPassword"
+        android:hint="Name" />
 
     <Button
         android:layout_width="match_parent"
@@ -43,7 +43,7 @@
         android:backgroundTint="@color/white"
         android:text="로그인"
         android:textColor="@color/black"
-        android:onClick="test_sgin"/>
+        android:onClick="try_sign"/>
 
     <com.google.android.gms.common.SignInButton
         android:layout_width="match_parent"

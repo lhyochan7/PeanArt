@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.PeanArt">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -9,22 +12,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Allowance">
+
         <activity
             android:name=".FragmentsManager"
             android:exported="false" />
-
         <activity
             android:name=".AiResult"
             android:exported="false" />
         <activity
-            android:name=".Login"
-            android:exported="false" />
-        <activity
-            android:name=".MainPage"
-            android:exported="false" />
-        <activity
             android:name=".MyPage"
-            android:exported="false" />
+            android:exported="false"
+            tools:ignore="Instantiatable" />
         <activity
             android:name=".RegisterGallery"
             android:exported="false" />
@@ -32,7 +30,7 @@
             android:name=".SignUp"
             android:exported="false" />
         <activity
-            android:name=".Recomendation"
+            android:name=".Login"
             android:exported="true" >
 
             <intent-filter>
