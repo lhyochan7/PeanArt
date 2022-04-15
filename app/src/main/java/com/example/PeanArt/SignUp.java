@@ -12,16 +12,25 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class SignUp extends AppCompatActivity {
-    // Member Variable
+    // view
     Button signBTN;
-    EditText usernameETXT, nicknameETXT, pwdETXT, emailETXT;
+    EditText usernameETXT, pwdETXT, emailETXT;
+    //firebase
     private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
+    //debug
     private String TAG = "SignUp";
 
     @Override
@@ -29,12 +38,14 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up);
 
+        //view
         signBTN = (Button) findViewById(R.id.signBTN);
         usernameETXT = (EditText) findViewById(R.id.usernameETXT);
-        nicknameETXT = (EditText) findViewById(R.id.nicknameETXT);
         pwdETXT = (EditText) findViewById(R.id.pwdETXT);
         emailETXT = (EditText) findViewById(R.id.emailETXT);
 
+        //firebase
+        db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
     }
 
@@ -43,11 +54,6 @@ public class SignUp extends AppCompatActivity {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser !=null){ //sangho
-            //pass
-        }else{
-            Log.i(TAG, "이미 로그인 했습니다");
-        }
     }
 
     public void sign(View view) {
@@ -61,16 +67,15 @@ public class SignUp extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
+                        if(task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
-                            Toast.makeText(SignUp.this, "Authentication success !!",
-                                    Toast.LENGTH_SHORT).show();
 
                             sign.putExtra("userinfo", user);
+                            user_add_func(user.getUid(), nick);
                             setResult(RESULT_OK, sign);
+
                             finish();
                         } else {
                             // If sign in fails, display a message to the user.
@@ -79,7 +84,7 @@ public class SignUp extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
                             setResult(RESULT_CANCELED, sign);
                             finish();
-                            updateUI(null);
+
                         }
                     }
                 });
@@ -88,4 +93,24 @@ public class SignUp extends AppCompatActivity {
     private void updateUI(FirebaseUser user) {
         //pass
     }
+    public void user_add_func(String uid, String nick){
+        Map<String, Object> user_input = new HashMap<>();
+        user_input.put("NICK", nick);
+
+        db.collection("test_users").document(uid)
+                .set(user_input)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error adding document", e);
+                    }
+                });
+    }
+
 }
