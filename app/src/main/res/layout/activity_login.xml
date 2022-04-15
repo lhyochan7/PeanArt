@@ -18,34 +18,40 @@
         app:srcCompat="@drawable/logo" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/edit_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name" />
+        android:text="email" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/edit_pass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="numberPassword"
         android:text="Name" />
 
     <Button
-        android:id="@+id/button5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:backgroundTint="@color/white"
+        android:text="로그인"
+        android:textColor="@color/black"
+        android:onClick="test_sgin"/>
+
+    <com.google.android.gms.common.SignInButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:text="LOGIN"
-        android:textColor="#343EFF"
-        android:backgroundTint="#F8F8FF"/>
-
+        android:id="@+id/signInButton"/>
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/txt_password_lost"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
