@@ -113,23 +113,7 @@ public class FragmentsManager<var> extends AppCompatActivity {
             }
         });
 
-        Map<String, Object> userinfo = new HashMap<>();
-        userinfo.put("first", "test");
 
-        docRef
-                .set(userinfo, SetOptions.merge())
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        Log.d(TAG, "write successwrite successwrite successwrite successwrite successwrite successwrite successwrite success");
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "write failurewrite failurewrite failurewrite failurewrite failurewrite failurewrite failurewrite failurewrite failure");
-                    }
-                });
 
     }
 
