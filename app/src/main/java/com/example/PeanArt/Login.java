@@ -67,6 +67,7 @@ public class Login extends AppCompatActivity {
                 }
             }
         });
+
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -94,7 +95,9 @@ public class Login extends AppCompatActivity {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser(); //활동을 초기화할 때 사용자가 현재 로그인되어 있는지 확인
-
+        if(currentUser != null){
+            Log.i(TAG, "이미 google 로그인 되어있음");
+        }
         //updateUI(currentUser);
     }
 
@@ -111,6 +114,7 @@ public class Login extends AppCompatActivity {
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 firebaseAuthWithGoogle(account);
+
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
                 Log.w(TAG, "Google sign in failed", e);
@@ -135,9 +139,11 @@ public class Login extends AppCompatActivity {
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
 
-                            //updateUI(user);
-                            Toast.makeText(getApplicationContext(), "Complete", Toast.LENGTH_LONG).show();
-
+                            Toast.makeText(getApplicationContext(), "google login Complete", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(Login.this,MainPage.class);
+                            intent.putExtra("userinfo", user);
+                            startActivity(intent);
+                            finish();
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
@@ -155,12 +161,10 @@ public class Login extends AppCompatActivity {
     } //firebase
 
     // [START signin]
-    private void signIn() {
+    private void signIn() { //google 로그인 event
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
-
-
     // [END signin]
 
     private void signOut() {
@@ -191,14 +195,10 @@ public class Login extends AppCompatActivity {
                 });
     }
 
-
-
-    public void go_sign(View view) {
+    public void go_sign(View view) { //회원가입 화면 이동event
         mLauncher.launch(new Intent(this, SignUp.class));
-
     }
-
-    public void try_sign(View view){
+    public void try_sign(View view){ //일반 로그인 event
         edit_pass = findViewById(R.id.edit_pass);
         edit_email = findViewById(R.id.edit_email);
 
@@ -218,7 +218,7 @@ public class Login extends AppCompatActivity {
                             Intent intent = new Intent(Login.this,MainPage.class);
                             intent.putExtra("userinfo",user);
                             startActivity(intent);
-
+                            finish();
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
@@ -230,7 +230,5 @@ public class Login extends AppCompatActivity {
                 });
 
     }
-
-
 
 }
