@@ -99,7 +99,7 @@ public class Login extends AppCompatActivity {
             Log.i(TAG, "이미 google 로그인 되어있음");
         }
         //updateUI(currentUser);
-    }
+    } //로그인 체크
 
     // [END on_start_check_user]
 
@@ -138,6 +138,9 @@ public class Login extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+
+                            SignUp s = new SignUp();
+                            s.user_add_func(user.getUid(),user.getDisplayName());
 
                             Toast.makeText(getApplicationContext(), "google login Complete", Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(Login.this,MainPage.class);
