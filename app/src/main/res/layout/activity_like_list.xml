@@ -15,7 +15,8 @@
         android:gravity="center"
         android:text="좋아요 목록"
         android:textSize="24sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        />
 
 
     <ScrollView
