@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_purple"
     android:layout_gravity="bottom"
-    tools:context="com.example.PeanArt.MainPage">
+    tools:context="com.example.PeanArt.MainPage"
+    android:background="@color/main_bg">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
@@ -22,6 +22,7 @@
         android:id="@+id/mainLAY"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="@color/main_bg"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

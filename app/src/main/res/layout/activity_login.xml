@@ -7,7 +7,7 @@
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".Login"
-    android:background="@color/mainbg">
+    android:background="@color/main_bg">
 
 
     <ImageView
@@ -24,7 +24,7 @@
         android:layout_margin="20dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:hint="email" />
+        android:hint="@string/email" />
 
     <EditText
         android:id="@+id/edit_pass"
@@ -33,7 +33,7 @@
         android:layout_margin="20dp"
         android:ems="10"
         android:inputType="textPassword"
-        android:hint="Name" />
+        android:hint="@string/pwd" />
 
     <Button
         android:layout_width="match_parent"

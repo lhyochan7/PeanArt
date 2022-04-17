@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".Recomendation"
     android:orientation="vertical"
-    android:background="@color/mainbg"
+    android:background="@color/main_bg"
     android:paddingTop="30dp"
     android:gravity="top">
 
