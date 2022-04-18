@@ -4,9 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
@@ -23,29 +21,33 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Login extends AppCompatActivity {
     //data intent
     private ActivityResultLauncher<Intent> mLauncher;
 
     //view
-    private TextView go_signTXT;
-    private Button btn_login;
     private SignInButton signInButton;
     private EditText edit_pass;
     private EditText edit_email;
-    private Button btn_try_sign;
 
     //firebase
     private GoogleSignInClient mGoogleSignInClient;
     private FirebaseAuth mAuth; //
     private int RC_SIGN_IN=123;
+    private FirebaseFirestore db;
 
     //DEBUG
     private String TAG="Login";
@@ -55,7 +57,8 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         signInButton = findViewById(R.id.signInButton);
-        go_signTXT = (TextView) findViewById(R.id.go_signTXT);
+
+        db = FirebaseFirestore.getInstance();
         mLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>(){
             @Override
             public void onActivityResult(ActivityResult result) {
@@ -86,7 +89,6 @@ public class Login extends AppCompatActivity {
                 signIn();
             }
         });
-
 
     } //onCreate
 
@@ -139,8 +141,25 @@ public class Login extends AppCompatActivity {
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
 
-                            SignUp s = new SignUp();
-                            s.user_add_func(user.getUid(),user.getDisplayName());
+                            Map<String, Object> user_input = new HashMap<>();
+
+                            user_input.put("NICK", user.getDisplayName());
+                            Log.i(TAG, user_input.toString());
+
+                            db.collection("test_users").document(user.getUid())
+                                    .set(user_input)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Log.d(TAG, "DocumentSnapshot successfully written!");
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.w(TAG, "Error adding document", e);
+                                        }
+                                    });
 
                             Toast.makeText(getApplicationContext(), "google login Complete", Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(Login.this,MainPage.class);
