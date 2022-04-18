@@ -3,7 +3,7 @@
     <item
         android:id="@+id/homeItem"
         android:enabled="true"
-        android:icon="@drawable/home"
+        android:icon="@drawable/homeicon"
         android:title="홈" />
     <item
         android:id="@+id/recommendItem"
@@ -13,11 +13,11 @@
     <item
         android:id="@+id/likedItem"
         android:enabled="true"
-        android:icon="@drawable/liked"
+        android:icon="@drawable/likedicon"
         android:title="좋아요" />
     <item
-        android:id="@+id/myPageItem"
+        android:id="@+id/profileItem"
         android:enabled="true"
-        android:icon="@drawable/profile"
+        android:icon="@drawable/profileicon"
         android:title="프로필" />
 </menu>
