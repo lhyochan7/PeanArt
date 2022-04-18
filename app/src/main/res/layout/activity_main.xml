@@ -5,7 +5,7 @@
     android:id="@+id/mainLAY"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_purple"
+    android:background="@color/main_bg"
     android:orientation="vertical"
     tools:context="com.example.PeanArt.MainPage">
 
@@ -13,7 +13,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/main_bg">
 
         <ImageView
             android:id="@+id/imageView3"
@@ -29,6 +30,7 @@
             android:layout_gravity="center_vertical"
             android:layout_margin="5dp"
             android:gravity="left|center_vertical"
+            android:background="@color/main_bg"
             android:text="대구광역시" />
 
         <Button
@@ -47,7 +49,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:backgroundTint="@color/main_bg">
 
 
         <Button
@@ -69,7 +72,7 @@
             android:layout_marginRight="5dp"
             android:layout_weight="1"
             android:text="@string/cat_univ"
-            android:textSize="10sp"
+            android:textSize="9sp"
             app:cornerRadius="20dp" />
 
         <Button
@@ -80,7 +83,7 @@
             android:layout_marginRight="5dp"
             android:layout_weight="1"
             android:text="@string/cat_ind"
-            android:textSize="10sp"
+            android:textSize="9sp"
             app:cornerRadius="20dp" />
 
         <Button
@@ -99,12 +102,14 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:background="@color/main_bg">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@color/main_bg">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardview1"

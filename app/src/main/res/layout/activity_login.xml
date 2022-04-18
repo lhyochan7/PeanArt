@@ -7,7 +7,7 @@
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".Login"
-    android:background="@color/mainbg">
+    android:background="@color/main_bg">
 
 
     <ImageView
@@ -18,34 +18,40 @@
         app:srcCompat="@drawable/logo" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/edit_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name" />
+        android:hint="@string/email" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/edit_pass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name" />
+        android:inputType="textPassword"
+        android:hint="@string/pwd" />
 
     <Button
-        android:id="@+id/button5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:backgroundTint="@color/white"
+        android:text="로그인"
+        android:textColor="@color/black"
+        android:onClick="try_sign"/>
+
+    <com.google.android.gms.common.SignInButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:text="LOGIN"
-        android:textColor="#343EFF"
-        android:backgroundTint="#F8F8FF"/>
-
+        android:id="@+id/signInButton"/>
     <TextView
-        android:id="@+id/mypage_welcome_name"
+        android:id="@+id/txt_password_lost"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"

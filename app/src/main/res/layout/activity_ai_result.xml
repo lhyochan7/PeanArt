@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".AiResult">
+    tools:context=".AiResult"
+    android:background="@color/main_bg">
 
     <TextView
         android:id="@+id/textView4"

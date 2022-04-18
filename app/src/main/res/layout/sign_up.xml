@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:layout_marginTop="10dp"
     android:layout_marginBottom="10dp"
-    android:background="@color/mainbg"
+    android:background="@color/main_bg"
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".SignUp">
@@ -36,22 +36,6 @@
         android:textColorHint="#303481"
         android:textSize="20sp" />
 
-
-    <EditText
-        android:id="@+id/nicknameETXT"
-        android:layout_width="300dp"
-        android:layout_height="57dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/border"
-        android:drawableStart="@drawable/profile_resize"
-        android:drawablePadding="5dp"
-        android:ems="10"
-        android:hint="@string/nickname"
-        android:inputType="textPersonName"
-        android:padding="10dp"
-        android:textColorHint="#303481"
-        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/pwdETXT"
