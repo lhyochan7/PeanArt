@@ -9,5 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="light_purple">#F5F5FA</color>
     <color name="mainblue">#303481</color>
-    <color name="mainbg">#F5F5F5</color>
+    <color name="main_bg">#F5F5F5</color>
 </resources>

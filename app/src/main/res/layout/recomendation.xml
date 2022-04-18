@@ -7,8 +7,9 @@
     android:layout_height="match_parent"
     tools:context=".Recomendation"
     android:orientation="vertical"
-    android:background="@color/mainbg"
-    android:gravity="bottom">
+    android:background="@color/main_bg"
+    android:paddingTop="30dp"
+    android:gravity="top">
 
     <TextView
         android:id="@+id/textView"
@@ -96,13 +97,4 @@
             android:onClick="rcmd" />
     </LinearLayout>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        app:labelVisibilityMode="unlabeled"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/menu_bottomnavigationview" />
 </LinearLayout>
