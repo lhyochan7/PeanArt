@@ -2,17 +2,15 @@
 buildscript {
 
     repositories {
-        // Check that you have the following line (if not, add it):
-        google()  // Google's Maven repository
+        google()
         mavenCentral()
         jcenter()
     }
 
     dependencies {
-        // ...
 
-        // Add the following line:
         classpath 'com.google.gms:google-services:4.3.8'  // Google Services plugin
+
     }
 }
 
@@ -25,3 +23,5 @@ plugins {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+apply plugin: "com.google.gms.google-services"

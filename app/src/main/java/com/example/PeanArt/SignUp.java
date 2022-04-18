@@ -27,9 +27,11 @@ public class SignUp extends AppCompatActivity {
     // view
     Button signBTN;
     EditText usernameETXT, pwdETXT, emailETXT;
+
     //firebase
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
+
     //debug
     private String TAG = "SignUp";
 
@@ -88,12 +90,10 @@ public class SignUp extends AppCompatActivity {
                         }
                     }
                 });
+    }
 
-    }
-    private void updateUI(FirebaseUser user) {
-        //pass
-    }
     public void user_add_func(String uid, String nick){
+        Log.i(TAG,uid+" / "+nick);
         Map<String, Object> user_input = new HashMap<>();
         user_input.put("NICK", nick);
 
