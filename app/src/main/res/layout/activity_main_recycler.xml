@@ -17,10 +17,11 @@
         android:background="@color/main_bg">
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/locationIMG"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_margin="5dp"
+            android:onClick="locate"
             app:srcCompat="@drawable/point" />
 
         <TextView
