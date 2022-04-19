@@ -13,34 +13,30 @@
         <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/layout/activity_ai_result.xml" value="0.2674772036474164" />
         <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/layout/activity_fragment.xml" value="0.2864583333333333" />
         <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/layout/activity_like_list.xml" value="0.19972826086956522" />
+        <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/layout/activity_location.xml" value="0.4005208333333333" />
         <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/layout/activity_main.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/layout/activity_main_recycler.xml" value="0.4005208333333333" />
         <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/layout/activity_my_page.xml" value="0.19972826086956522" />
         <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/layout/activity_register_gallery.xml" value="0.20878623188405798" />
         <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/layout/border.xml" value="0.4067028985507246" />
+        <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/layout/fragment_exhibition_detail.xml" value="0.4005208333333333" />
         <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/layout/fragment_main_page.xml" value="0.3145833333333333" />
         <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/layout/fragment_manager.xml" value="0.3145833333333333" />
+        <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/layout/fragment_my_page.xml" value="0.4005208333333333" />
+        <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/layout/item_detail_img.xml" value="0.2758152173913043" />
+        <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/layout/item_exhibit_cardview.xml" value="0.4005208333333333" />
+        <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/layout/item_recyclerview.xml" value="0.4005208333333333" />
         <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/layout/recomendation.xml" value="0.15611814345991562" />
         <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/layout/sign_in.xml" value="0.2889733840304182" />
         <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/layout/sign_up.xml" value="0.2692502532928065" />
         <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/layout/test.xml" value="0.31354166666666666" />
         <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/layout/underbar.xml" value="0.2388888888888889" />
         <entry key="..\:/Users/HUSTAR17/Documents/test/peanart/PeanArt/app/src/main/res/menu/menu_bottomnavigationview.xml" value="0.3145833333333333" />
-        <entry key="..\:/Users/HUSTAR23/AndroidStudioProjects/master/app/src/main/res/layout/activity_main_recycler.xml" value="0.2128623188405797" />
-        <entry key="..\:/Users/HUSTAR23/AndroidStudioProjects/master/app/src/main/res/layout/fragment_exhibition_detail.xml" value="0.2327760891590679" />
-        <entry key="..\:/Users/HUSTAR23/AndroidStudioProjects/master/app/src/main/res/layout/fragment_my_page.xml" value="0.2327760891590679" />
-        <entry key="..\:/Users/HUSTAR23/AndroidStudioProjects/master/app/src/main/res/layout/item_exhibit_cardview.xml" value="0.2327760891590679" />
-        <entry key="..\:/Users/HUSTAR23/AndroidStudioProjects/master/app/src/main/res/layout/item_followeduser.xml" value="0.2327760891590679" />
-        <entry key="..\:/Users/HUSTAR23/AndroidStudioProjects/master/app/src/main/res/layout/item_recyclerview.xml" value="0.2327760891590679" />
-        <entry key="..\:/Users/HUSTAR24/StudioProjects/PeanArt/app/src/main/res/layout/activity_my_page.xml" value="0.14444444444444443" />
-        <entry key="..\:/Users/HUSTAR24/StudioProjects/PeanArt/app/src/main/res/layout/activity_register_gallery.xml" value="0.22" />
         <entry key="..\:/Users/HUSTAR25/AndroidStudioProjects/allowance/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.25" />
         <entry key="..\:/Users/HUSTAR25/AndroidStudioProjects/allowance/app/src/main/res/layout/activity_main.xml" value="0.33" />
       </map>
     </option>
-  </component>
-  <component name="ProjectPlainTextFileTypeManager">
-    <file url="file://$PROJECT_DIR$/app/build/generated/res/google-services/debug/values/values.xml" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />

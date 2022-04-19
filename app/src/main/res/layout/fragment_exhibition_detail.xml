@@ -91,11 +91,15 @@
                 android:layout_height="wrap_content"
                 android:text="거미줄을 의미하는 드림캐쳐의 문앙을 피어나는 꽃으로 표현" />
 
-            <ListView
-                android:id="@+id/exhibit_detail_list"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/detailLAY"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/exhibit_detail_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-            </ListView>
+            </androidx.recyclerview.widget.RecyclerView>
         </LinearLayout>
     </ScrollView>
     <!-- TODO: Update blank fragment layout -->
