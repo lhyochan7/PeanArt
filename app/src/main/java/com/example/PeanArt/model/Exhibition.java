@@ -2,9 +2,10 @@ package com.example.PeanArt.model;
 
 import com.google.firebase.firestore.GeoPoint;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Exhibition {
+public class Exhibition implements Serializable {
     private String id, title, detail, info, URI, UID, category;
     private int kind;
     private Date startDate, endDate;

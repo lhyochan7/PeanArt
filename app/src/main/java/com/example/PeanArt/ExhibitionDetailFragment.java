@@ -1,11 +1,14 @@
 package com.example.PeanArt;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+
+import com.example.PeanArt.model.Exhibition;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -49,6 +52,8 @@ public class ExhibitionDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
+            // 잘 받아오는지 테스트
+            Log.i("EDF", "onCreate: " + ((Exhibition)getArguments().get("exhibition")).getTitle());
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }

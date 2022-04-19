@@ -1,5 +1,6 @@
 package com.example.PeanArt.adapter;
 
+import android.app.Activity;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.PeanArt.FragmentsManager;
 import com.example.PeanArt.R;
 import com.example.PeanArt.model.Exhibition;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,8 +26,8 @@ import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 
 public class ExhibitAdapter extends RecyclerView.Adapter<ExhibitAdapter.ViewHolder> {
+    private static final String TAG = "EA_Test";
     private ArrayList<Exhibition> mExhibitList;
-
     public interface OnExhibitionSelectedListener {
         void onExhibitionSelectedListener(DocumentSnapshot exhibition);
     }
@@ -74,7 +76,7 @@ public class ExhibitAdapter extends RecyclerView.Adapter<ExhibitAdapter.ViewHold
         }
         void onBind(Exhibition exhibition){
             // cardImg Set
-            storageRef.child("exhibition/"+exhibition.getId()+"/poster.jpg").getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+            storageRef.child("Exhibition/"+exhibition.getId()+"/poster.png").getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
                 @Override
                 public void onComplete(@NonNull Task<Uri> task) {
                     if(task.isSuccessful()){
@@ -84,6 +86,7 @@ public class ExhibitAdapter extends RecyclerView.Adapter<ExhibitAdapter.ViewHold
             });
             cardTitle.setText(exhibition.getTitle());
             cardInfo.setText(exhibition.getInfo());
+            cardView.setOnClickListener(((FragmentsManager)itemView.getContext()).onClickListener(exhibition));
             // txt_sd.setText(exhibition.getStartDate().toString());
             // txt_ed.setText(exhibition.getEndDate().toString());
             // txt_geo.setText(exhibition.getLocation().toString());
