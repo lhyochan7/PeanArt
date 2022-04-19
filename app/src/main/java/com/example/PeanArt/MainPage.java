@@ -26,6 +26,11 @@ public class MainPage extends Fragment {
     private String TAG = "MainPage";
     String uid;
     private FirebaseFirestore fs;
+    // view 용 variable
+    ArrayList<Exhibition> mExhibitList;
+    RecyclerView rcView;
+    ExhibitAdapter mExhibitAdapter;
+
     public MainPage() {
     }
 
@@ -43,21 +48,26 @@ public class MainPage extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.activity_main_recycler, container, false);
-        ArrayList<Exhibition> mExhibitList = new ArrayList<Exhibition>();
-        RecyclerView rcView = rootView.findViewById(R.id.rcView_main);
+        mExhibitList = new ArrayList<Exhibition>();
+        rcView = rootView.findViewById(R.id.rcView_main);
         rcView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        ExhibitAdapter mExhibitAdapter = new ExhibitAdapter();
+        mExhibitAdapter = new ExhibitAdapter();
         rcView.setAdapter(mExhibitAdapter);
+        setRecyclerview();
+        return rootView;
+    }
+    public void setRecyclerview(){
         fs.collection("exhibition").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
                     for (DocumentSnapshot document : task.getResult()){
                         if(document.exists()){
-                            Log.i(TAG, String.valueOf(document.exists()));
-                            Log.i(TAG, document.toString());
                             Log.i(TAG, document.get("detail").toString());
-                            mExhibitList.add(document.toObject(Exhibition.class));
+                            Exhibition tmp = document.toObject(Exhibition.class);
+                            Log.i(TAG, "Before SetID: " + tmp.getId());
+                            tmp.setId(document.getId()); // 별도로 ID ( Exhibition의 Document ID ) 추가.
+                            mExhibitList.add(tmp);
                         }
                     }
                     mExhibitAdapter.setmExhibitList(mExhibitList);
@@ -67,7 +77,6 @@ public class MainPage extends Fragment {
                 }
             }
         });
-        return rootView;
     }
 
     @Override

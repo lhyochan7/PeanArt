@@ -5,20 +5,26 @@ import com.google.firebase.firestore.GeoPoint;
 import java.util.Date;
 
 public class Exhibition {
-    private String title, detail, info;
+    private String id, title, detail, info, URI, UID, category;
+    private int kind;
     private Date startDate, endDate;
     private GeoPoint location;
 
     public Exhibition() {
     }
 
-    public Exhibition(String title, String detail, String info, Date startDate, Date endDate, GeoPoint location) {
+    public Exhibition(String id, String title, String detail, String info, Date startDate, Date endDate, GeoPoint location, String URI, String UID, String category, int kind) {
+        this.id = id;
         this.title = title;
         this.detail = detail;
         this.info = info;
         this.startDate = startDate;
         this.endDate = endDate;
         this.location = location;
+        this.URI = URI;
+        this.UID = UID;
+        this.category = category;
+        this.kind = kind;
     }
 
     public String getTitle() {
@@ -67,5 +73,45 @@ public class Exhibition {
 
     public void setLocation(GeoPoint location) {
         this.location = location;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getURI() {
+        return URI;
+    }
+
+    public void setURI(String URI) {
+        this.URI = URI;
+    }
+
+    public String getUID() {
+        return UID;
+    }
+
+    public void setUID(String UID) {
+        this.UID = UID;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public int getKind() {
+        return kind;
+    }
+
+    public void setKind(int kind) {
+        this.kind = kind;
     }
 }
