@@ -54,7 +54,7 @@
                 android:id="@+id/exhibit_detail_posterImg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/img1" />
+                 />
 
             <View
                 android:id="@+id/divider3"
@@ -91,49 +91,11 @@
                 android:layout_height="wrap_content"
                 android:text="거미줄을 의미하는 드림캐쳐의 문앙을 피어나는 꽃으로 표현" />
 
-            <TableLayout
+            <ListView
+                android:id="@+id/exhibit_detail_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:id="@+id/imageView3"
-                        android:layout_width="150dp"
-                        android:layout_height="200dp"
-                        android:layout_margin="20dp"
-                        android:src="@drawable/monariza" />
-
-                    <ImageView
-                        android:id="@+id/imageView4"
-                        android:layout_width="150dp"
-                        android:layout_height="200dp"
-                        android:layout_margin="20dp"
-                        android:src="@drawable/pearl" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:id="@+id/imageView9"
-                        android:layout_width="150dp"
-                        android:layout_height="200dp"
-                        android:layout_margin="20dp"
-                        android:src="@drawable/monariza" />
-
-                    <ImageView
-                        android:id="@+id/imageView10"
-                        android:layout_width="150dp"
-                        android:layout_height="200dp"
-                        android:layout_margin="20dp"
-                        android:src="@drawable/pearl" />
-                </TableRow>
-
-            </TableLayout>
+            </ListView>
         </LinearLayout>
     </ScrollView>
     <!-- TODO: Update blank fragment layout -->

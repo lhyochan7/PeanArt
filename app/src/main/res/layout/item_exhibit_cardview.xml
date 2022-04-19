@@ -10,7 +10,8 @@
         android:id="@+id/cardView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:layout_gravity="center_vertical"
         android:layout_margin="10dp"
         app:cardCornerRadius="20dp"
         app:cardElevation="30dp">
@@ -27,17 +28,30 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="좋아요"
+                android:id="@+id/card_checkbox"
+                app:layout_constraintBottom_toTopOf="@+id/card1_linearLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/IMG_card_exhibit"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <LinearLayout
                 android:id="@+id/card1_linearLayout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="164dp"
+                android:layout_height="116dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/IMG_card_exhibit"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toBottomOf="@id/card_checkbox">
+
 
                 <TextView
                     android:id="@+id/txt_card_exhibit_title"
@@ -50,19 +64,10 @@
                 <TextView
                     android:id="@+id/txt_card_exhibit_info"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="88dp"
                     android:layout_weight="1"
                     android:text="대구대에서 열리는 전시회" />
             </LinearLayout>
-
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="좋아요"
-                app:layout_constraintBottom_toTopOf="@+id/card1_linearLayout"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/IMG_card_exhibit"
-                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

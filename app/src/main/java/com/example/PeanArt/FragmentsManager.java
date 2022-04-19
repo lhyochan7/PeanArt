@@ -113,6 +113,7 @@ public class FragmentsManager<var> extends AppCompatActivity {
                 if (view.getId() == R.id.cardView){
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("exhibition", exhibition);
+                    Log.i(TAG, exhibition.getId());
                     exhibitionDetailFragment.setArguments(bundle);
                     getSupportFragmentManager().beginTransaction().replace(R.id.mainLAY, exhibitionDetailFragment).commit();
                 }

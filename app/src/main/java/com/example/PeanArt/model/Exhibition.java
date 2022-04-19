@@ -8,7 +8,7 @@ import java.util.Date;
 public class Exhibition implements Serializable {
     private String id, title, detail, info, URI, UID, category;
     private int kind;
-    private Date startDate, endDate;
+    private Date startdate, enddate;
     private GeoPoint location;
 
     public Exhibition() {
@@ -19,8 +19,8 @@ public class Exhibition implements Serializable {
         this.title = title;
         this.detail = detail;
         this.info = info;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.startdate = startdate;
+        this.enddate = enddate;
         this.location = location;
         this.URI = URI;
         this.UID = UID;
@@ -53,19 +53,19 @@ public class Exhibition implements Serializable {
     }
 
     public Date getStartDate() {
-        return startDate;
+        return startdate;
     }
 
     public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+        this.startdate = startDate;
     }
 
     public Date getEndDate() {
-        return endDate;
+        return enddate;
     }
 
     public void setEndDate(Date endDate) {
-        this.endDate = endDate;
+        this.enddate = endDate;
     }
 
     public GeoPoint getLocation() {

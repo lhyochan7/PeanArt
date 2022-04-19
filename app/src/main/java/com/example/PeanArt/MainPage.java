@@ -67,6 +67,7 @@ public class MainPage extends Fragment {
                             Exhibition tmp = document.toObject(Exhibition.class);
                             Log.i(TAG, "Before SetID: " + tmp.getId());
                             tmp.setId(document.getId()); // 별도로 ID ( Exhibition의 Document ID ) 추가.
+                            Log.i(TAG, "Get Exhibition ID : " + document.getId());
                             mExhibitList.add(tmp);
                         }
                     }
