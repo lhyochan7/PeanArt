@@ -86,7 +86,7 @@ public class ExhibitAdapter extends RecyclerView.Adapter<ExhibitAdapter.ViewHold
             });
             cardTitle.setText(exhibition.getTitle());
             cardInfo.setText(exhibition.getInfo());
-            cardView.setOnClickListener(((FragmentsManager)itemView.getContext()).onClickListener(exhibition));
+            cardView.setOnClickListener(((FragmentsManager)itemView.getContext()).exhibitDetailListener(exhibition));
             // txt_sd.setText(exhibition.getStartDate().toString());
             // txt_ed.setText(exhibition.getEndDate().toString());
             // txt_geo.setText(exhibition.getLocation().toString());

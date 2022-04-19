@@ -106,7 +106,7 @@ public class FragmentsManager<var> extends AppCompatActivity {
             return true;
         }
     }
-    public View.OnClickListener onClickListener(Exhibition exhibition){
+    public View.OnClickListener exhibitDetailListener(Exhibition exhibition){
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
