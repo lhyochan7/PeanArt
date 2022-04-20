@@ -6,15 +6,15 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Exhibition implements Serializable {
-    private String id, title, detail, info, URI, UID, category;
+    private String id, title, detail, info, URI, UID, category, startDate, endDate, location;
     private int kind;
-    private Date startDate, endDate;
-    private GeoPoint location;
+    // private Date startDate, endDate;
+    // private GeoPoint location;
     private boolean liked;
     public Exhibition() {
     }
 
-    public Exhibition(String id, String title, String detail, String info, Date startDate, Date endDate, GeoPoint location, String URI, String UID, String category, int kind) {
+    public Exhibition(String id, String title, String detail, String info, String startDate, String endDate, String location, String URI, String UID, String category, int kind) {
         this.id = id;
         this.title = title;
         this.detail = detail;
@@ -53,27 +53,27 @@ public class Exhibition implements Serializable {
         this.info = info;
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 
-    public GeoPoint getLocation() {
+    public String getLocation() {
         return location;
     }
 
-    public void setLocation(GeoPoint location) {
+    public void setLocation(String location) {
         this.location = location;
     }
 

@@ -68,34 +68,38 @@ public class LikeList extends Fragment {
                         if(document.exists()){
                             // 현재 회원이 좋아요 한 전시회 목록
                             List<String> likedExhibition = (List<String>)document.get("liked");
-                            Log.i(TAG, "likedExhibition Array: " + (likedExhibition).toString());
-                            Log.i(TAG, "partition array: " + Lists.partition(likedExhibition, 10).toString());
-                            // 좋아요 한 전시회 목록을 10개 단위로 쪼개서 쿼리에 넣어 실행 ( Array를 이용한 쿼리문(WhereIn)은 한번에 조회할수 있는 Array 크기가 10으로 제한됨. )
-                            for (List<String> partition : Lists.partition(likedExhibition, 10)){
-                                fs.collection("exhibition").whereIn(FieldPath.documentId(), partition).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                        if(task.isSuccessful()){
-                                            Exhibition tmp = new Exhibition();
-                                            for(DocumentSnapshot documentSnapshot : task.getResult()){
-                                                if(documentSnapshot.exists()){
-                                                    // 전시회 내용이 비어있으면 표시하지 않고 다음 전시회 불러옴
-                                                    if(documentSnapshot.getData().size() == 0){
-                                                        Log.i(TAG, "document is empty!");
-                                                        continue;
+                            // liked 필드가 없을경우 ( or liked 필드가 비어있을 경우 ) 아무것도 안보여줌
+                            boolean isLikedListEmpty = likedExhibition==null;
+                            if(!isLikedListEmpty){
+                                Log.i(TAG, "isLikedListEmpty" + isLikedListEmpty);
+                                Log.i(TAG, "partition array: " + Lists.partition(likedExhibition, 10).toString());
+                                // 좋아요 한 전시회 목록을 10개 단위로 쪼개서 쿼리에 넣어 실행 ( Array를 이용한 쿼리문(WhereIn)은 한번에 조회할수 있는 Array 크기가 10으로 제한됨. )
+                                for (List<String> partition : Lists.partition(likedExhibition, 10)){
+                                    fs.collection("exhibition").whereIn(FieldPath.documentId(), partition).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                            if(task.isSuccessful()){
+                                                Exhibition tmp = new Exhibition();
+                                                for(DocumentSnapshot documentSnapshot : task.getResult()){
+                                                    if(documentSnapshot.exists()){
+                                                        // 전시회 내용이 비어있으면 표시하지 않고 다음 전시회 불러옴
+                                                        if(documentSnapshot.getData().size() == 0){
+                                                            Log.i(TAG, "document is empty!");
+                                                            continue;
+                                                        }
+                                                        // RecyclerView Adapter용 list에 적재.
+                                                        tmp = documentSnapshot.toObject(Exhibition.class);
+                                                        tmp.setId(documentSnapshot.getId());
+                                                        tmp.setLiked(true);
+                                                        mExhibitList.add(tmp);
                                                     }
-                                                    // RecyclerView Adapter용 list에 적재.
-                                                    tmp = documentSnapshot.toObject(Exhibition.class);
-                                                    tmp.setId(documentSnapshot.getId());
-                                                    tmp.setLiked(true);
-                                                    mExhibitList.add(tmp);
                                                 }
-                                            }
-                                            mExhibitAdapter.setmExhibitList(mExhibitList);
-                                            mExhibitAdapter.notifyDataSetChanged();
-                                        }else{}
-                                    }
-                                });
+                                                mExhibitAdapter.setmExhibitList(mExhibitList);
+                                                mExhibitAdapter.notifyDataSetChanged();
+                                            }else{}
+                                        }
+                                    });
+                                }
                             }
                         }
                     }
