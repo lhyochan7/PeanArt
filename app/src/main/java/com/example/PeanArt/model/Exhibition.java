@@ -6,26 +6,27 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Exhibition implements Serializable {
-    private String id, title, detail, info, URI, UID, category;
+    private String id, title, detail, info, URI, UID, category, startDate, endDate, location;
     private int kind;
-    private Date startdate, enddate;
-    private GeoPoint location;
-
+    // private Date startDate, endDate;
+    // private GeoPoint location;
+    private boolean liked;
     public Exhibition() {
     }
 
-    public Exhibition(String id, String title, String detail, String info, Date startDate, Date endDate, GeoPoint location, String URI, String UID, String category, int kind) {
+    public Exhibition(String id, String title, String detail, String info, String startDate, String endDate, String location, String URI, String UID, String category, int kind) {
         this.id = id;
         this.title = title;
         this.detail = detail;
         this.info = info;
-        this.startdate = startdate;
-        this.enddate = enddate;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.location = location;
         this.URI = URI;
         this.UID = UID;
         this.category = category;
         this.kind = kind;
+        this.liked = false;
     }
 
     public String getTitle() {
@@ -52,27 +53,27 @@ public class Exhibition implements Serializable {
         this.info = info;
     }
 
-    public Date getStartDate() {
-        return startdate;
+    public String getStartDate() {
+        return startDate;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startdate = startDate;
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
     }
 
-    public Date getEndDate() {
-        return enddate;
+    public String getEndDate() {
+        return endDate;
     }
 
-    public void setEndDate(Date endDate) {
-        this.enddate = endDate;
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 
-    public GeoPoint getLocation() {
+    public String getLocation() {
         return location;
     }
 
-    public void setLocation(GeoPoint location) {
+    public void setLocation(String location) {
         this.location = location;
     }
 
@@ -114,5 +115,13 @@ public class Exhibition implements Serializable {
 
     public void setKind(int kind) {
         this.kind = kind;
+    }
+
+    public boolean isLiked() {
+        return liked;
+    }
+
+    public void setLiked(boolean liked) {
+        this.liked = liked;
     }
 }

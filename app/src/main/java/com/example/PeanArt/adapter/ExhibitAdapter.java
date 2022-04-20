@@ -1,11 +1,10 @@
 package com.example.PeanArt.adapter;
 
-import android.app.Activity;
 import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -61,15 +60,17 @@ public class ExhibitAdapter extends RecyclerView.Adapter<ExhibitAdapter.ViewHold
         ImageView cardImg;
         TextView cardTitle, cardInfo, txt_ed, txt_sd, txt_geo;
         CardView cardView;
+        ImageButton likedBtn;
         StorageReference storageRef;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             // 접근할 firebase storage url setting
             storageRef = FirebaseStorage.getInstance("gs://peanart-b433a.appspot.com/").getReference();
             cardView = itemView.findViewById(R.id.cardView);
-            cardImg = itemView.findViewById(R.id.IMG_card_exhibit);
+            cardImg = itemView.findViewById(R.id.exhibit_posterImg);
             cardTitle = itemView.findViewById(R.id.txt_card_exhibit_title);
             cardInfo = itemView.findViewById(R.id.txt_card_exhibit_info);
+            likedBtn = itemView.findViewById(R.id.btn_card_like);
             // txt_sd = itemView.findViewById(R.id.txt_startDate);
             // txt_ed = itemView.findViewById(R.id.txt_endDate);
             // txt_geo = itemView.findViewById(R.id.txt_geoPoint);
@@ -86,7 +87,15 @@ public class ExhibitAdapter extends RecyclerView.Adapter<ExhibitAdapter.ViewHold
             });
             cardTitle.setText(exhibition.getTitle());
             cardInfo.setText(exhibition.getInfo());
-            cardView.setOnClickListener(((FragmentsManager)itemView.getContext()).onClickListener(exhibition));
+            cardView.setOnClickListener(((FragmentsManager)itemView.getContext()).exhibitDetailListener(exhibition));
+            if(exhibition.isLiked()){
+                likedBtn.setImageResource(R.drawable.likedicon);
+                likedBtn.setTag(true);
+            }else{
+                likedBtn.setImageResource(R.drawable.unlikedicon);
+                likedBtn.setTag(false);
+            }
+            likedBtn.setOnClickListener(((FragmentsManager) itemView.getContext()).onLikeListener(exhibition.getId()));
             // txt_sd.setText(exhibition.getStartDate().toString());
             // txt_ed.setText(exhibition.getEndDate().toString());
             // txt_geo.setText(exhibition.getLocation().toString());

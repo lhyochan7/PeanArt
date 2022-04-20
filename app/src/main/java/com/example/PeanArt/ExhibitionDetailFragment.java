@@ -53,9 +53,8 @@ public class ExhibitionDetailFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String detailID, detailTitle, detailDesc;
+    private String detailID, detailTitle, detailDesc, startDate, endDate;
     private TextView detailTitleTXT, detailDateTXT, detailDescTXT;
-    private Date startDate, endDate;
     private Serializable detailExhibition;
     StorageReference storageRef;
     ImageView exhibit_detail_posterImg;

@@ -1,8 +1,9 @@
 package com.example.PeanArt.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class User {
+public class User implements Serializable {
     String ID, nickname;
     ArrayList<String> liked, follow;
 
