@@ -141,9 +141,10 @@ public class ExhibitionDetailFragment extends Fragment {
                             Log.i(TAG, cnt + "번째");
                             cnt++;
                         }
+                        cnt = cnt-1;
                         Log.i(TAG, "씹라개수" + cnt);
-                        for (int i=0; i<cnt; i++) {
-                            list.add(String.format("TEXT %d", i)) ;
+                        for (int i=1; i<cnt; i++) {
+                            list.add(String.format(detailID + "/" + i)) ;
                         }
                     }
                 });
@@ -151,9 +152,9 @@ public class ExhibitionDetailFragment extends Fragment {
 
 
         RecyclerView recyclerView = rootView.findViewById(R.id.exhibit_detail_recycler);
-//        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
-//        recyclerView.setLayoutManager(gridLayoutManager);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
+        recyclerView.setLayoutManager(gridLayoutManager);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         DetailAdapter detailAdapter = new DetailAdapter(list);
         recyclerView.setAdapter(detailAdapter);
         return rootView;
