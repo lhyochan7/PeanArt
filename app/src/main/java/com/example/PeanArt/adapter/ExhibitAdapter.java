@@ -1,8 +1,6 @@
 package com.example.PeanArt.adapter;
 
-import android.app.Activity;
 import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +35,7 @@ public class ExhibitAdapter extends RecyclerView.Adapter<ExhibitAdapter.ViewHold
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_exhibit_cardview2, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_exhibit_cardview, parent, false);
 
         return new ViewHolder(view);
     }
