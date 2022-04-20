@@ -140,7 +140,8 @@ public class RegisterGallery extends AppCompatActivity {
         exhibition_input_string.put("detail", edit_exhibition_detail.getText().toString());
         exhibition_input_string.put("enddate", end_date);
         exhibition_input_string.put("info", edit_exhibition_info.getText().toString());
-        exhibition_input_string.put("kind", spinner_kind.getSelectedItem());
+        exhibition_input_string.put("kind", spinner_kind.getSelectedItemPosition() +1);
+
         exhibition_input_string.put("location", "41°24'12.2\"N 2°10'26.5\"E");
         exhibition_input_string.put("startdate",start_date);
         exhibition_input_string.put("title", edit_exhibition_name.getText().toString());

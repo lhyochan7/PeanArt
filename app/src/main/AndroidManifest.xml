@@ -30,10 +30,6 @@
             android:value="AIzaSyDEEiPkSLx6q4GdXwG-RzhqAnHEPe_7PSA" />
 
         <activity
-            android:name=".Location"
-            android:exported="false"
-            android:label="@string/title_activity_location" />
-        <activity
             android:name=".FragmentsManager"
             android:exported="false" />
 
@@ -42,7 +38,7 @@
             android:exported="false" />
 
         <activity
-            android:name=".RegisterGallery"
+            android:name=".Login"
             android:exported="false" />
 
         <activity
@@ -50,7 +46,7 @@
             android:exported="false" />
 
         <activity
-            android:name=".Login"
+            android:name=".RegisterGallery"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
