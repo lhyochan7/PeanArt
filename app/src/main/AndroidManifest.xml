@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Allowance">
         <activity
-            android:name=".FragmentsManager"
+            android:name=".Login"
             android:exported="false" />
 
         <activity
@@ -30,7 +30,7 @@
             android:exported="false" />
 
         <activity
-            android:name=".Login"
+            android:name=".FragmentsManager"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

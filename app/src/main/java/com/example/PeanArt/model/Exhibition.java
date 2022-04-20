@@ -10,7 +10,7 @@ public class Exhibition implements Serializable {
     private int kind;
     private Date startDate, endDate;
     private GeoPoint location;
-
+    private boolean liked;
     public Exhibition() {
     }
 
@@ -26,6 +26,7 @@ public class Exhibition implements Serializable {
         this.UID = UID;
         this.category = category;
         this.kind = kind;
+        this.liked = false;
     }
 
     public String getTitle() {
@@ -114,5 +115,13 @@ public class Exhibition implements Serializable {
 
     public void setKind(int kind) {
         this.kind = kind;
+    }
+
+    public boolean isLiked() {
+        return liked;
+    }
+
+    public void setLiked(boolean liked) {
+        this.liked = liked;
     }
 }

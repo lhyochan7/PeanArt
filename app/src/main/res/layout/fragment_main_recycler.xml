@@ -54,7 +54,7 @@
 
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btn_main_all"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -65,7 +65,7 @@
             app:cornerRadius="20dp" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/btn_main_coll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -76,7 +76,7 @@
             app:cornerRadius="20dp" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/btn_main_inde"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -87,7 +87,7 @@
             app:cornerRadius="20dp" />
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/btn_main_etc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"

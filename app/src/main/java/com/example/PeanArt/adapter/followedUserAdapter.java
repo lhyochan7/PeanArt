@@ -28,7 +28,7 @@ public class followedUserAdapter extends RecyclerView.Adapter<followedUserAdapte
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_main, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_followeduser, parent, false);
         storageRef = FirebaseStorage.getInstance("gs://peanart-b433a.appspot.com/").getReference();
         return new ViewHolder(view);
     }
@@ -52,11 +52,12 @@ public class followedUserAdapter extends RecyclerView.Adapter<followedUserAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         ImageView imageView;
-        TextView txtView;
+        TextView txtView_nickname;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.followed_user_img);
-            txtView = itemView.findViewById(R.id.followed_uesr_nickname);
+            txtView_nickname = itemView.findViewById(R.id.followed_user_nickname);
+            Log.i("VIEW TEST", "ViewHolder: " + txtView_nickname.getId());
         }
         void onBind(User user){
             // 추후 User 클래스를 parameter로 받는걸로 바꿔서 그 User에서
@@ -69,7 +70,9 @@ public class followedUserAdapter extends RecyclerView.Adapter<followedUserAdapte
                     }
                 }
             });
-            txtView.setText("닉네임: "+ user.getNickname());
+            Log.i("fUA Test", "onBind: " + user.getNickname());
+            Log.i("fUA Test", "onBind: " + user.getID());
+            txtView_nickname.setText("닉네임: "+ user.getNickname());
         }
     }
 }

@@ -6,8 +6,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -26,12 +29,16 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldPath;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
+import com.google.firebase.firestore.Transaction;
 import com.google.firebase.ktx.Firebase;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -72,6 +79,7 @@ public class FragmentsManager<var> extends AppCompatActivity {
         }
 
 
+        uid = "FTScRKFyelcxtPA2u2hN7bA7bJD3";
         Bundle bundle = new Bundle();
         bundle.putString("uid", uid);
         fragmentMain.setArguments(bundle);
@@ -82,6 +90,7 @@ public class FragmentsManager<var> extends AppCompatActivity {
         fragmentManager.beginTransaction()
                 .replace(R.id.mainLAY, fragmentMain)
                 .commit();
+
     }
 
     class ItemSelectedListener implements BottomNavigationView.OnNavigationItemSelectedListener {
@@ -116,6 +125,46 @@ public class FragmentsManager<var> extends AppCompatActivity {
                     exhibitionDetailFragment.setArguments(bundle);
                     getSupportFragmentManager().beginTransaction().replace(R.id.mainLAY, exhibitionDetailFragment).commit();
                 }
+            }
+        };
+    }
+    public View.OnClickListener onLikeListener(String exhibitionID){
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final DocumentReference DocRef = LikeList.fs.collection("test_users").document(uid);
+                LikeList.fs.runTransaction(new Transaction.Function<Void>() {
+                    @Nullable
+                    @Override
+                    public Void apply(@NonNull Transaction transaction) throws FirebaseFirestoreException {
+                        DocumentSnapshot snapshot = transaction.get(DocRef);
+                        ArrayList<String> tmpList = (ArrayList<String>) snapshot.get("liked");
+                        if(tmpList.contains(exhibitionID)){
+                            tmpList.remove(exhibitionID);
+                        } else {
+                            tmpList.add(exhibitionID);
+                        }
+                        transaction.update(DocRef, "liked", tmpList);
+                        return null;
+                    }
+                }).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Log.i(TAG, "Transaction success!");
+                        if((Boolean)view.getTag()){
+                            ((ImageButton)view).setImageResource(R.drawable.unlikedicon);
+                            view.setTag(false);
+                        } else{
+                            ((ImageButton)view).setImageResource(R.drawable.likedicon);
+                            view.setTag(true);
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.i(TAG, "Transaction failure.", e);
+                    }
+                });
             }
         };
     }

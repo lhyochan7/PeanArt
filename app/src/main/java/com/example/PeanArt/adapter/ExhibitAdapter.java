@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -36,7 +37,7 @@ public class ExhibitAdapter extends RecyclerView.Adapter<ExhibitAdapter.ViewHold
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_exhibit_cardview, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_exhibit_cardview2, parent, false);
 
         return new ViewHolder(view);
     }
@@ -61,6 +62,7 @@ public class ExhibitAdapter extends RecyclerView.Adapter<ExhibitAdapter.ViewHold
         ImageView cardImg;
         TextView cardTitle, cardInfo, txt_ed, txt_sd, txt_geo;
         CardView cardView;
+        ImageButton likedBtn;
         StorageReference storageRef;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -70,6 +72,7 @@ public class ExhibitAdapter extends RecyclerView.Adapter<ExhibitAdapter.ViewHold
             cardImg = itemView.findViewById(R.id.IMG_card_exhibit);
             cardTitle = itemView.findViewById(R.id.txt_card_exhibit_title);
             cardInfo = itemView.findViewById(R.id.txt_card_exhibit_info);
+            likedBtn = itemView.findViewById(R.id.cardView_likedBtn);
             // txt_sd = itemView.findViewById(R.id.txt_startDate);
             // txt_ed = itemView.findViewById(R.id.txt_endDate);
             // txt_geo = itemView.findViewById(R.id.txt_geoPoint);
@@ -87,6 +90,14 @@ public class ExhibitAdapter extends RecyclerView.Adapter<ExhibitAdapter.ViewHold
             cardTitle.setText(exhibition.getTitle());
             cardInfo.setText(exhibition.getInfo());
             cardView.setOnClickListener(((FragmentsManager)itemView.getContext()).exhibitDetailListener(exhibition));
+            if(exhibition.isLiked()){
+                likedBtn.setImageResource(R.drawable.likedicon);
+                likedBtn.setTag(true);
+            }else{
+                likedBtn.setImageResource(R.drawable.unlikedicon);
+                likedBtn.setTag(false);
+            }
+            likedBtn.setOnClickListener(((FragmentsManager) itemView.getContext()).onLikeListener(exhibition.getId()));
             // txt_sd.setText(exhibition.getStartDate().toString());
             // txt_ed.setText(exhibition.getEndDate().toString());
             // txt_geo.setText(exhibition.getLocation().toString());
