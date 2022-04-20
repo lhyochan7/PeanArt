@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.PeanArt.model.Exhibition;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -40,7 +42,7 @@ public class FragmentsManager<var> extends AppCompatActivity {
     private Recomendation fragmentRecommend = new Recomendation();
     private LikeList fragmentLike = new LikeList();
     private MyPage fragmentMypage = new MyPage();
-
+    private ExhibitionDetailFragment exhibitionDetailFragment = new ExhibitionDetailFragment();
     String uid = null;
 
     private final String TAG = "FragManager";
@@ -103,5 +105,19 @@ public class FragmentsManager<var> extends AppCompatActivity {
 
             return true;
         }
+    }
+    public View.OnClickListener onClickListener(Exhibition exhibition){
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (view.getId() == R.id.cardView){
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("exhibition", exhibition);
+                    Log.i(TAG, exhibition.getId());
+                    exhibitionDetailFragment.setArguments(bundle);
+                    getSupportFragmentManager().beginTransaction().replace(R.id.mainLAY, exhibitionDetailFragment).commit();
+                }
+            }
+        };
     }
 }
