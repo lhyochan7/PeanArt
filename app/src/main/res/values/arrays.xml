@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="kind_list">
+        <item>개인</item>
+        <item>영리 기업</item>
+        <item>기타</item>
+    </string-array>
+
+    <string-array name="category_list">
+        <item>Baroque</item>
+        <item>Abstract Expresionism</item>
+        <item>Action Painting</item>
+        <item>Analytical Cubism</item>
+        <item>Art Nouveau Modern</item>
+        <item>Baroque</item>
+        <item>Color Field Painting</item>
+        <item>Contemporay Realism</item>
+        <item>Cubism</item>
+        <item>Early Renaissance</item>
+        <item>Expressionism</item>
+        <item>Fauvism</item>
+        <item>High Renaissance</item>
+        <item>Impressionism</item>
+        <item>Mannerism Late Resnaissance</item>
+        <item>Minimalism</item>
+        <item>Naive Art Primitivism</item>
+        <item>New Realism</item>
+        <item>Northern Renaissance</item>
+        <item>Pointillism</item>
+        <item>Pop Art</item>
+        <item>Post Impressionism</item>
+        <item>Realism</item>
+        <item>Rococo</item>
+        <item>Romanticism</item>
+        <item>Symbolism</item>
+        <item>Synthetic Cubism</item>
+        <item>Ukiyo_e</item>
+        <item>기타</item>
+    </string-array>
+</resources>
