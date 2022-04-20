@@ -47,7 +47,7 @@ public class RegisterGallery extends AppCompatActivity {
     private EditText edit_exhibition_name; //전시회 이름
     private EditText edit_exhibition_detail; //상세 설명
     private EditText edit_exhibition_info; //간략 정보
-    private EditText edit_location;//전시 장소(미구현)
+    private TextView edit_location;//전시 장소(미구현)
     private EditText edit_exhibition_uri; //전시 uri
     private ImageView input_image; //전시 이미지
     private Button btn_register; //등록 버튼
@@ -80,6 +80,7 @@ public class RegisterGallery extends AppCompatActivity {
         //view finder
         input_image = findViewById(R.id.input_image);
         btn_register = findViewById(R.id.btn_register);
+        edit_location = (TextView)findViewById(R.id.edit_location);
 
         //firebase instance init
         storage = FirebaseStorage.getInstance();
@@ -95,6 +96,14 @@ public class RegisterGallery extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Exhibition_add_func(test_uid);
+            }
+        });
+
+        edit_location.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent addr = new Intent(getApplicationContext(), com.example.PeanArt.Map.class);
+                startActivityForResult(addr, 123456);
             }
         });
 
@@ -142,7 +151,7 @@ public class RegisterGallery extends AppCompatActivity {
         exhibition_input_string.put("info", edit_exhibition_info.getText().toString());
         exhibition_input_string.put("kind", spinner_kind.getSelectedItemPosition() +1);
 
-        exhibition_input_string.put("location", "41°24'12.2\"N 2°10'26.5\"E");
+        exhibition_input_string.put("location", edit_location.getText().toString());
         exhibition_input_string.put("startdate",start_date);
         exhibition_input_string.put("title", edit_exhibition_name.getText().toString());
 
@@ -187,6 +196,9 @@ public class RegisterGallery extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+        else if(requestCode == 123456){
+            edit_location.setText(data.getStringExtra("addr"));
         }
     }
 

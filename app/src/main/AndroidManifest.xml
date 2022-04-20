@@ -45,6 +45,9 @@
             android:name=".SignUp"
             android:exported="false" />
 
+        <activity android:name=".Map"
+            android:exported="false" />
+
         <activity
             android:name=".RegisterGallery"
             android:exported="true">
