@@ -20,7 +20,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/IMG_card_exhibit"
+                android:id="@+id/exhibit_posterImg"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:layout_marginLeft="10dp"
@@ -38,7 +38,7 @@
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/IMG_card_exhibit"
+                app:layout_constraintStart_toEndOf="@+id/exhibit_posterImg"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
@@ -60,7 +60,7 @@
             </LinearLayout>
 
             <ImageButton
-                android:id="@+id/cardView_likedBtn"
+                android:id="@+id/btn_card_like"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:background="@android:color/transparent"

@@ -67,10 +67,10 @@ public class ExhibitAdapter extends RecyclerView.Adapter<ExhibitAdapter.ViewHold
             // 접근할 firebase storage url setting
             storageRef = FirebaseStorage.getInstance("gs://peanart-b433a.appspot.com/").getReference();
             cardView = itemView.findViewById(R.id.cardView);
-            cardImg = itemView.findViewById(R.id.IMG_card_exhibit);
+            cardImg = itemView.findViewById(R.id.exhibit_posterImg);
             cardTitle = itemView.findViewById(R.id.txt_card_exhibit_title);
             cardInfo = itemView.findViewById(R.id.txt_card_exhibit_info);
-            likedBtn = itemView.findViewById(R.id.cardView_likedBtn);
+            likedBtn = itemView.findViewById(R.id.btn_card_like);
             // txt_sd = itemView.findViewById(R.id.txt_startDate);
             // txt_ed = itemView.findViewById(R.id.txt_endDate);
             // txt_geo = itemView.findViewById(R.id.txt_geoPoint);

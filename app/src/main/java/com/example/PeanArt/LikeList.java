@@ -45,7 +45,6 @@ public class LikeList extends Fragment {
         if(bundle != null){
             uid = bundle.getString("uid");
         }
-        uid = "FTScRKFyelcxtPA2u2hN7bA7bJD3";
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,6 +58,7 @@ public class LikeList extends Fragment {
         LoadLikedList();
         return rootView;
     }
+    // 현재 로그인한 회원의 UID로 회원 객체 찾음. 그 안에 column인 liked (행렬) 찾아서 그 안에 있는 전시회 ID에 해당하는 전시회들 객체 찾아온 뒤 recycler view Adapter에 적재
     public void LoadLikedList(){
         fs.collection("test_users").whereEqualTo(FieldPath.documentId(), uid).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -68,19 +68,24 @@ public class LikeList extends Fragment {
                         if(document.exists()){
                             // 현재 회원이 좋아요 한 전시회 목록
                             List<String> likedExhibition = (List<String>)document.get("liked");
-                            Log.i(TAG, "onComplete: " + (likedExhibition).toString());
-                            Log.i(TAG, "array: " + Lists.partition(likedExhibition, 10).toString());
-                            // 좋아요 한 전시회 목록을 10개 단위로 쪼개서 쿼리에 넣어 실행 ( Array를 이용한 쿼리문(WhereIn)은 한번에 조회할수 있는 Array 크기가 10으로 제한됨.
+                            Log.i(TAG, "likedExhibition Array: " + (likedExhibition).toString());
+                            Log.i(TAG, "partition array: " + Lists.partition(likedExhibition, 10).toString());
+                            // 좋아요 한 전시회 목록을 10개 단위로 쪼개서 쿼리에 넣어 실행 ( Array를 이용한 쿼리문(WhereIn)은 한번에 조회할수 있는 Array 크기가 10으로 제한됨. )
                             for (List<String> partition : Lists.partition(likedExhibition, 10)){
                                 fs.collection("exhibition").whereIn(FieldPath.documentId(), partition).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                     @Override
                                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                         if(task.isSuccessful()){
-                                            Log.i(TAG, "onComplete: " + task.getResult().getDocuments().toString());
+                                            Exhibition tmp = new Exhibition();
                                             for(DocumentSnapshot documentSnapshot : task.getResult()){
                                                 if(documentSnapshot.exists()){
-                                                    Log.i(TAG, "found by Array_ title: " + documentSnapshot.get("title").toString());
-                                                    Exhibition tmp = documentSnapshot.toObject(Exhibition.class);
+                                                    // 전시회 내용이 비어있으면 표시하지 않고 다음 전시회 불러옴
+                                                    if(documentSnapshot.getData().size() == 0){
+                                                        Log.i(TAG, "document is empty!");
+                                                        continue;
+                                                    }
+                                                    // RecyclerView Adapter용 list에 적재.
+                                                    tmp = documentSnapshot.toObject(Exhibition.class);
                                                     tmp.setId(documentSnapshot.getId());
                                                     tmp.setLiked(true);
                                                     mExhibitList.add(tmp);
@@ -95,7 +100,6 @@ public class LikeList extends Fragment {
                         }
                     }
                 }else {
-
                 }
             }
         });

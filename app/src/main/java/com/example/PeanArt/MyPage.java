@@ -56,7 +56,6 @@ public class MyPage extends Fragment {
         if(bundle != null){
             uid = bundle.getString("uid");
         }
-        uid = "FTScRKFyelcxtPA2u2hN7bA7bJD3";
     }
 
     @Override

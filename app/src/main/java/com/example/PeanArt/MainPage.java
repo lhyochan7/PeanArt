@@ -48,7 +48,6 @@ public class MainPage extends Fragment {
         }
         fs = FirebaseFirestore.getInstance();
         searchTrigger = 0;
-        uid = "FTScRKFyelcxtPA2u2hN7bA7bJD3";
     }
 
     @Override
@@ -96,6 +95,7 @@ public class MainPage extends Fragment {
     }
     public void setRecyclerview(){
         Task<QuerySnapshot> res;
+        // recyclerView Adapter의 User Array 초기화
         mExhibitList.clear();
         //SearchTrigger => 0 : 전체 / 1 : 대학 전시회 / 2: 개인 전시회 / 3 : 기타
         switch (searchTrigger){
@@ -118,17 +118,26 @@ public class MainPage extends Fragment {
                 if(task.isSuccessful()){
                     if(task.getResult().exists()){
                         ArrayList<String> likedList = (ArrayList<String>) task.getResult().get("liked");
+                        // liked list가 비어있을 경우
+                        boolean isLikedListEmpty = likedList==null;
+                        Log.i(TAG, "isLikedListEmpty" + isLikedListEmpty);
                         res.addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                 if(task.isSuccessful()){
                                     for (DocumentSnapshot document : task.getResult()){
                                         if(document.exists()){
+                                            // 전시회 내용이 비어있으면 표시하지 않고 다음 전시회 불러옴
+                                            if(document.getData().size() == 0){
+                                                Log.i(TAG, "document is empty!");
+                                                continue;
+                                            }
                                             Log.i(TAG, document.get("detail").toString());
                                             Exhibition tmp = document.toObject(Exhibition.class);
-                                            Log.i(TAG, "Before SetID: " + tmp.getId());
                                             tmp.setId(document.getId()); // 별도로 ID ( Exhibition의 Document ID ) 추가.
-                                            if(likedList.contains(tmp.getId())) tmp.setLiked(true);
+                                            if(!isLikedListEmpty){
+                                                if(likedList.contains(tmp.getId())) tmp.setLiked(true);
+                                            }
                                             mExhibitList.add(tmp);
                                         }
                                     }

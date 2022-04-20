@@ -79,7 +79,6 @@ public class FragmentsManager<var> extends AppCompatActivity {
         }
 
 
-        uid = "FTScRKFyelcxtPA2u2hN7bA7bJD3";
         Bundle bundle = new Bundle();
         bundle.putString("uid", uid);
         fragmentMain.setArguments(bundle);

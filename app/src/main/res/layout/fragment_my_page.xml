@@ -23,7 +23,7 @@
             android:background="@drawable/rectanglebg"
             android:elevation="10dp"
             android:padding="10dp"
-            app:srcCompat="@drawable/profilepic" />
+            app:srcCompat="@drawable/profileicon" />
 
         <Button
             android:id="@+id/btn_regist_exhibition"
