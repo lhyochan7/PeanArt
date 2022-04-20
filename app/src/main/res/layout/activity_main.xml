@@ -112,7 +112,7 @@
             android:background="@color/main_bg">
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardview1"
+                android:id="@+id/cardView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
