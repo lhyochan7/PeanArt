@@ -46,17 +46,13 @@ public class Recommendation extends Fragment implements View.OnClickListener {
     private final String TAG = "Recommendation";
 
     // Member Variable
-
     String uid;
-
-//    ImageView venusIMG, screamIMG, starryIMG, monarisaIMG, pearlIMG, kissIMG;
 
     // UI 선언
     private TextView testTV;
     private EncodedModel224 model;
     private Button aiBTN;
-    private ImageView imgVW;
-    private ImageButton imageButton1, imageButton2, imageButton3, imageButton4, imageButton5, imageButton6;
+    private ImageView imgVW, imageButton1, imageButton2, imageButton3, imageButton4, imageButton5, imageButton6;
     private LinearLayout loadingScreen, recommendScreen;
 
 
@@ -88,20 +84,25 @@ public class Recommendation extends Fragment implements View.OnClickListener {
 
 
         // UI 선언
-        imageButton1 = (ImageButton) rootView.findViewById(R.id.imageButton1);
+        imageButton1 = (ImageView) rootView.findViewById(R.id.imageButton1);
         imageButton1.setDrawingCacheEnabled(true);
-        imageButton2 = (ImageButton) rootView.findViewById(R.id.imageButton2);
+        imageButton2 = (ImageView) rootView.findViewById(R.id.imageButton2);
         imageButton2.setDrawingCacheEnabled(true);
-        imageButton3 = (ImageButton) rootView.findViewById(R.id.imageButton3);
+        imageButton3 = (ImageView) rootView.findViewById(R.id.imageButton3);
         imageButton3.setDrawingCacheEnabled(true);
-        imageButton4 = (ImageButton) rootView.findViewById(R.id.imageButton4);
+        imageButton4 = (ImageView) rootView.findViewById(R.id.imageButton4);
         imageButton4.setDrawingCacheEnabled(true);
-        imageButton5 = (ImageButton) rootView.findViewById(R.id.imageButton5);
+        imageButton5 = (ImageView) rootView.findViewById(R.id.imageButton5);
         imageButton5.setDrawingCacheEnabled(true);
-        imageButton6 = (ImageButton) rootView.findViewById(R.id.imageButton6);
+        imageButton6 = (ImageView) rootView.findViewById(R.id.imageButton6);
         imageButton6.setDrawingCacheEnabled(true);
 
         imageButton1.setOnClickListener(this);
+        imageButton2.setOnClickListener(this);
+        imageButton3.setOnClickListener(this);
+        imageButton4.setOnClickListener(this);
+        imageButton5.setOnClickListener(this);
+        imageButton6.setOnClickListener(this);
 
 
         storage = FirebaseStorage.getInstance("gs://peanart-b433a.appspot.com/");
@@ -195,17 +196,12 @@ public class Recommendation extends Fragment implements View.OnClickListener {
             e.printStackTrace();
         }
 
-
         // Recommendation Image 넣기
         Random rand = new Random();
 
         while (imgIds.size() < 6) {
             imgIds.add(rand.nextInt((12 - 1) + 1) + 1);
         }
-
-
-        Log.i(TAG, "setRand = " + imgIds);
-
 
         imageChoices
                 .listAll()
@@ -226,7 +222,7 @@ public class Recommendation extends Fragment implements View.OnClickListener {
                                             if (imgIds.contains(idx)) {
                                                 Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
 
-                                                Bitmap resizedImg = Bitmap.createScaledBitmap(bitmap, 224, 224, true);
+                                                Bitmap resizedImg = Bitmap.createScaledBitmap(bitmap, 500, 500, true);
                                                 Log.i(TAG, "IMG ID = " + idx);
 
                                                 switch (imgCNT++) {
@@ -257,16 +253,6 @@ public class Recommendation extends Fragment implements View.OnClickListener {
                     }
                 });
 
-
-
-
-
-
-
-
-
-
-
         return rootView;
     }
 
@@ -291,72 +277,6 @@ public class Recommendation extends Fragment implements View.OnClickListener {
 
         Log.i(TAG, "RESUME UID : " + uid);
     }
-
-
-
-
-
-
-
-//    public void analyzeImage(View view) {
-//        byteBuffer.clear();
-//
-//        switch (view.getId()) {
-//            case R.id.imageButton1:
-//                imageButton1.destroyDrawingCache();   //destroy preview Created cache if any
-//                imageButton1.buildDrawingCache();
-//
-//                // Convert image to bitmap and resize
-//                Bitmap image = imageButton1.getDrawingCache();
-//                Bitmap resizedImg = Bitmap.createScaledBitmap(image, 224, 224, true);
-//                resizedImg.copyPixelsToBuffer(byteBuffer);
-//                break;
-//        }
-//
-//        // Creates inputs for reference and load Buffer to bitmap
-//        TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 224, 224, 3}, DataType.FLOAT32);
-//        inputFeature0.loadBuffer(byteBuffer);
-//
-//        // Runs model inference and gets result.
-//        EncodedModel224.Outputs outputs = model.process(inputFeature0);
-//        TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
-//
-//        // Get predicted feature values
-//        float[] inputData = outputFeature0.getFloatArray();
-//        testTV.setText(Integer.toString(inputData.length));
-//
-//        normalize(inputData);
-//
-//
-//        // get Eucledian Distance and top Three recommendation images
-//        dists = new HashMap<Integer, Float>();
-//
-//        for (Integer key : dataList.keySet()) {
-//
-//            Log.i(TAG, "key = " + key);
-//
-//            dists.put(key, getEuclideanDistance(dataList.get(key), inputData));
-//        }
-//
-//        List<Map.Entry<Integer, Float>> list = new ArrayList<>(dists.entrySet());
-//        list.sort(Map.Entry.comparingByValue());
-//
-//
-//        for (int i = 0; i < 3; i++) {
-//            Map.Entry<Integer, Float> a = list.get(i);
-//            topThree[i] = a.getKey();
-//        }
-//
-//        for (int i = 0; i < topThree.length; i++) {
-//            Log.i(TAG, "topThree[" + i + "] = " + topThree[i]);
-//        }
-//
-//        Intent intent = new Intent(getActivity().this, RecommendationResult.class);
-//        intent.putExtra("topThree", topThree);
-//        startActivity(intent);
-//
-//    }
-
 
     public static float getEuclideanDistance(float[] v1, float[] v2) {
         float sum = 0.0f;

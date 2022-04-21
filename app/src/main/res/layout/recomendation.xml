@@ -41,28 +41,40 @@
         android:id="@+id/recommendScreen"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
         android:orientation="vertical"
         android:visibility="visible">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/textView6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:gravity="center"
+            android:text="@string/chooseIMG"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:text="@string/chooseIMG" />
 
-            <ImageButton
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <ImageView
                 android:id="@+id/imageButton1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_weight="1"
                 android:onClick="analyzeImage"
                 tools:ignore="SpeakableTextPresentCheck"
                 tools:src="@tools:sample/avatars" />
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/imageButton2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_weight="1"
                 android:onClick="analyzeImage"
                 tools:ignore="SpeakableTextPresentCheck"
@@ -71,22 +83,25 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="1">
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/imageButton3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_weight="1"
                 android:onClick="analyzeImage"
                 tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck"
                 tools:src="@tools:sample/avatars" />
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/imageButton4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_weight="1"
                 android:onClick="analyzeImage"
                 tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck"
@@ -96,21 +111,25 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:layout_weight="1">
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/imageButton5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_weight="1"
                 android:onClick="analyzeImage"
                 tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck"
                 tools:src="@tools:sample/avatars" />
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/imageButton6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_weight="1"
                 android:onClick="analyzeImage"
                 tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck"
