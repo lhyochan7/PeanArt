@@ -58,7 +58,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
     @Override
     public void onMapReady(final GoogleMap googleMap) {
         mMap = googleMap;
-        geocoder = new Geocoder(this);
+        geocoder = new Geocoder(getApplicationContext());
 
         // 맵 터치 이벤트 구현 //
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener(){
@@ -67,8 +67,10 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
                 MarkerOptions mOptions = new MarkerOptions();
                 // 마커 타이틀
                 mOptions.title("마커 좌표");
-                Double latitude = point.latitude; // 위도
-                Double longitude = point.longitude; // 경도
+                Double latitude = point.latitude;// 위도
+                Double longitude = point.longitude;
+                latitude = Math.round(latitude*100)/100.0;
+                longitude = Math.round(longitude*100)/100.0;// 경도
                 // 마커의 스니펫(간단한 텍스트) 설정
                 mOptions.snippet(latitude.toString() + ", " + longitude.toString());
                 // LatLng: 위도 경도 쌍을 나타냄
