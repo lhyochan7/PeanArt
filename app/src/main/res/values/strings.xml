@@ -24,5 +24,6 @@
     <string name="regist_exhibition">전시회 등록</string>
     <string name="title_activity_location">Location</string>
     <string name="loading">모델 로딩중입니다!</string>
+    <string name="chooseIMG">마음에 드는 그림을 골라주세요!</string>
 
 </resources>
