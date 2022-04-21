@@ -176,6 +176,7 @@ public class RegisterGallery extends AppCompatActivity {
                         Log.w(TAG, "Error adding document", e);
                     }
                 });
+        finish();
     }
 
     private void loadAlbum(){
