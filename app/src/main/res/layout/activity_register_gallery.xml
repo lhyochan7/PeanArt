@@ -76,13 +76,13 @@
             android:onClick="showDatePicker"/>
 
         </LinearLayout>
-    <EditText
+    <TextView
         android:id="@+id/edit_location"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:gravity="center"
-        android:hint="전시 장소(미구현)"
+        android:hint="전시 장소"
         android:inputType="textMultiLine"
         tools:ignore="TouchTargetSizeCheck" />
 
