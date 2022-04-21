@@ -45,13 +45,22 @@
         android:hint="간략 정보"
         android:inputType="textMultiLine"
         tools:ignore="TouchTargetSizeCheck" />
+    <EditText
+        android:id="@+id/edit_exhibition_uri"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/gallery_uri"
+        android:inputType="textMultiLine"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center"
-        >
+        android:gravity="center">
+
         <TextView
             android:id="@+id/txt_start_day"
             android:layout_width="wrap_content"
@@ -62,39 +71,34 @@
             android:inputType="date"
             tools:ignore="TouchTargetSizeCheck"
             android:onClick="showDatePicker"
+            android:layout_weight="1"
             />
         <TextView
             android:layout_gravity="center"
+            android:gravity="center"
             android:id="@+id/txt_end_day"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:gravity="center"
             android:hint="전시 종료일"
             android:inputType="date"
             tools:ignore="TouchTargetSizeCheck"
-            android:onClick="showDatePicker"/>
+            android:onClick="showDatePicker"
+            android:layout_weight="1"/>
 
+        <TextView
+            android:id="@+id/edit_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:hint="전시 장소"
+            android:inputType="textMultiLine"
+            tools:ignore="TouchTargetSizeCheck"
+            android:layout_weight="1"/>
         </LinearLayout>
-    <TextView
-        android:id="@+id/edit_location"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:gravity="center"
-        android:hint="전시 장소"
-        android:inputType="textMultiLine"
-        tools:ignore="TouchTargetSizeCheck" />
 
-    <EditText
-        android:id="@+id/edit_exhibition_uri"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:gravity="center"
-        android:hint="@string/gallery_uri"
-        android:inputType="textMultiLine"
-        tools:ignore="TouchTargetSizeCheck" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -102,28 +106,7 @@
         android:gravity="left"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="전시 장르"
-            android:gravity="center"
-            />
-        <Spinner
-            android:id="@+id/spinner_month"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
 
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="left">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -132,12 +115,25 @@
 
         <Spinner
             android:id="@+id/spinner_year"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="전시 장르"
+            android:gravity="center"
+            />
+        <Spinner
+            android:id="@+id/spinner_month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+
     </LinearLayout>
+
 
     <Button
         android:id="@+id/btn_register"

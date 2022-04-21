@@ -9,33 +9,24 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.PeanArt.adapter.DetailAdapter;
-import com.example.PeanArt.adapter.ExhibitAdapter;
 import com.example.PeanArt.model.Exhibition;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.ListResult;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -53,8 +44,8 @@ public class ExhibitionDetailFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String detailID, detailTitle, detailDesc, startDate, endDate;
-    private TextView detailTitleTXT, detailDateTXT, detailDescTXT;
+    private String detailID, detailTitle, detailDesc, startDate, endDate, location;
+    private TextView detailTitleTXT, detailDateTXT, detailDescTXT,exhibit_detail_location;
     private Serializable detailExhibition;
     StorageReference storageRef;
     ImageView exhibit_detail_posterImg;
@@ -94,6 +85,7 @@ public class ExhibitionDetailFragment extends Fragment {
             startDate = ((Exhibition) detailExhibition).getStartDate();
             endDate = ((Exhibition) detailExhibition).getEndDate();
             detailDesc = ((Exhibition) detailExhibition).getDetail();
+            location = ((Exhibition) detailExhibition).getLocation();
         }
         Log.i(TAG, "Get Exhibition : " + detailTitle + detailDesc);
 
@@ -106,10 +98,12 @@ public class ExhibitionDetailFragment extends Fragment {
         detailTitleTXT = rootView.findViewById(R.id.exhibit_detail_title);
         detailDateTXT = rootView.findViewById(R.id.exhibit_detail_date);
         detailDescTXT = rootView.findViewById(R.id.exhibit_detail_descript);
+        exhibit_detail_location = rootView.findViewById(R.id.exhibit_detail_location);
 
         detailTitleTXT.setText(detailTitle);
         detailDateTXT.setText(startDate + " ~ " + endDate);
         detailDescTXT.setText(detailDesc);
+        exhibit_detail_location.setText(location);
 
         exhibit_detail_posterImg = (ImageView)rootView.findViewById(R.id.exhibit_detail_posterImg);
 
