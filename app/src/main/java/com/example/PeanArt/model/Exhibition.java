@@ -65,7 +65,7 @@ public class Exhibition implements Serializable {
         return enddate;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(String enddate) {
         this.enddate = enddate;
     }
 

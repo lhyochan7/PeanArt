@@ -46,11 +46,12 @@ public class MyPage extends Fragment {
     // User 프로필 사진 및 아이디 표시용 view
     private ImageView profileImg;
     private TextView welcome_name;
-    private Button btn_regist_exhibition;
     // Follow User Recycler View 용 Variable
     ArrayList<User> mUserList;
     RecyclerView rcView_follow;
     followedUserAdapter mFollowAdapter;
+    Button btn_regist_exhibition;
+    private final int REGISTER_CODE = 878787;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,19 +70,21 @@ public class MyPage extends Fragment {
         profileImg = rootView.findViewById(R.id.mypage_profileImg);
         welcome_name = rootView.findViewById(R.id.mypage_welcome_name);
         btn_regist_exhibition = rootView.findViewById(R.id.btn_regist_exhibition);
-        btn_regist_exhibition.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent msg = new Intent(getActivity(),RegisterGallery.class);
-                msg.putExtra("uid", uid);
-                startActivity(msg);
-            }
-        });
+
         mUserList = new ArrayList<User>();
         mFollowAdapter = new followedUserAdapter();
         rcView_follow = rootView.findViewById(R.id.mypage_rcView_followed);
         rcView_follow.setLayoutManager(new LinearLayoutManager(getActivity()));
         rcView_follow.setAdapter(mFollowAdapter);
+
+        btn_regist_exhibition.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent uidIntent = new Intent(getActivity(), RegisterGallery.class);
+                uidIntent.putExtra("uid", uid);
+                startActivity(uidIntent);
+            }
+        });
 
         LoadUserData();
         LoadFollowedUser();

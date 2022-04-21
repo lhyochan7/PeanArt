@@ -1,5 +1,6 @@
 package com.example.PeanArt;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -47,7 +48,7 @@ public class RegisterGallery extends AppCompatActivity {
     private EditText edit_exhibition_name; //전시회 이름
     private EditText edit_exhibition_detail; //상세 설명
     private EditText edit_exhibition_info; //간략 정보
-    private EditText edit_location;//전시 장소(미구현)
+    private TextView edit_location;//전시 장소(미구현)
     private EditText edit_exhibition_uri; //전시 uri
     private ImageView input_image; //전시 이미지
     private Button btn_register; //등록 버튼
@@ -57,7 +58,7 @@ public class RegisterGallery extends AppCompatActivity {
     //firebase
     private FirebaseStorage storage; // 스토리지 접근하기 위한 인스턴스
     private FirebaseFirestore db;
-    private Uri img_data;
+    private ClipData clipdata;
 
     //const
     private final int GALLERY_CODE = 10; //갤러리 접근하기 위한 코드
@@ -70,16 +71,22 @@ public class RegisterGallery extends AppCompatActivity {
     private int cnt = 1;
 
     //test variable
-    private String test_uid ="XW0VDeicIQWrVwYZAwPRPTXaySc2"; //MainPage?? 에서 userinfo 던져주세요
+
+    private String test_uid; //MainPage?? 에서 userinfo 던져주세요
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_gallery);
 
+        Intent uidIntent = getIntent();
+        test_uid = uidIntent.getStringExtra("uid");
+        Log.i(TAG, test_uid);
+
         //view finder
         input_image = findViewById(R.id.input_image);
         btn_register = findViewById(R.id.btn_register);
+        edit_location = (TextView)findViewById(R.id.edit_location);
 
         //firebase instance init
         storage = FirebaseStorage.getInstance();
@@ -95,6 +102,14 @@ public class RegisterGallery extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Exhibition_add_func(test_uid);
+            }
+        });
+
+        edit_location.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent addr = new Intent(getApplicationContext(), com.example.PeanArt.Map.class);
+                startActivityForResult(addr, 123456);
             }
         });
 
@@ -142,7 +157,7 @@ public class RegisterGallery extends AppCompatActivity {
         exhibition_input_string.put("info", edit_exhibition_info.getText().toString());
         exhibition_input_string.put("kind", spinner_kind.getSelectedItemPosition() +1);
 
-        exhibition_input_string.put("location", "41°24'12.2\"N 2°10'26.5\"E");
+        exhibition_input_string.put("location", edit_location.getText().toString());
         exhibition_input_string.put("startdate",start_date);
         exhibition_input_string.put("title", edit_exhibition_name.getText().toString());
 
@@ -153,7 +168,10 @@ public class RegisterGallery extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Log.d(TAG, "DocumentSnapshot successfully written!");
-                        image_upload_to_storage("gallery"+cnt); //fireStorage img update func
+                        image_upload_to_storage("gallery"+cnt,"poster.png",clipdata.getItemAt(0).getUri()); //fireStorage img update func
+                        for(int i =1; i <clipdata.getItemCount(); i++){
+                            image_upload_to_storage("gallery"+cnt,i+".png",clipdata.getItemAt(i).getUri()); //fireStorage img update func
+                        }
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -162,10 +180,12 @@ public class RegisterGallery extends AppCompatActivity {
                         Log.w(TAG, "Error adding document", e);
                     }
                 });
+        finish();
     }
 
     private void loadAlbum(){
-        Intent intent = new Intent(Intent.ACTION_PICK);
+        Intent intent = new Intent(Intent.ACTION_PICK,MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
         startActivityForResult(intent,GALLERY_CODE);
 
@@ -177,7 +197,7 @@ public class RegisterGallery extends AppCompatActivity {
 
         if(requestCode == GALLERY_CODE){
             try{
-                img_data = data.getData();
+                clipdata = data.getClipData();
                 InputStream in = getContentResolver().openInputStream(data.getData());
                 Bitmap img = BitmapFactory.decodeStream(in);
                 in.close();
@@ -188,12 +208,17 @@ public class RegisterGallery extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+        else if(requestCode == 123456){
+            edit_location.setText(data.getStringExtra("addr"));
+        }
     }
 
-    private void image_upload_to_storage(String path){ //사진 firestorage upload function
+    private void image_upload_to_storage(String path, String name, Uri upload_img){//사진 firestorage upload function
+
         StorageReference storageRef = storage.getReference();
-        StorageReference riversRef = storageRef.child("Exhibition/"+path+"/"+"1");
-        UploadTask uploadTask = riversRef.putFile(img_data);
+        StorageReference riversRef = storageRef.child("Exhibition/"+path+"/"+name);
+        UploadTask uploadTask = riversRef.putFile(upload_img);
+
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
@@ -212,7 +237,7 @@ public class RegisterGallery extends AppCompatActivity {
     }
 
     //date picker func
-    public void showDatePicker(View view) {  //click event
+    public void showDatePicker(View view) { //click event
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getSupportFragmentManager(),"datePicker");
         view_focus = view;

@@ -60,8 +60,8 @@ public class ExhibitionDetailFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String detailID, detailTitle, detailDesc, startDate, endDate;
-    private TextView detailTitleTXT, detailDateTXT, detailDescTXT;
+    private String detailID, detailTitle, detailDesc, startDate, endDate, location;
+    private TextView detailTitleTXT, detailDateTXT, detailDescTXT,exhibit_detail_location;
     private Serializable detailExhibition;
     StorageReference storageRef;
     FirebaseFirestore fs;
@@ -111,6 +111,7 @@ public class ExhibitionDetailFragment extends Fragment {
             endDate = ((Exhibition) detailExhibition).getEndDate();
             detailDesc = ((Exhibition) detailExhibition).getDetail();
             uid = getArguments().getString("uid");
+            location = ((Exhibition) detailExhibition).getLocation();
         }
         Log.i(TAG, "Get Exhibition : " + detailTitle + detailDesc);
         fs = FirebaseFirestore.getInstance();
@@ -124,10 +125,12 @@ public class ExhibitionDetailFragment extends Fragment {
         detailTitleTXT = rootView.findViewById(R.id.exhibit_detail_title);
         detailDateTXT = rootView.findViewById(R.id.exhibit_detail_date);
         detailDescTXT = rootView.findViewById(R.id.exhibit_detail_descript);
+        exhibit_detail_location = rootView.findViewById(R.id.exhibit_detail_location);
 
         detailTitleTXT.setText(detailTitle);
         detailDateTXT.setText(startDate + " ~ " + endDate);
         detailDescTXT.setText(detailDesc);
+        exhibit_detail_location.setText(location);
 
         exhibit_detail_posterImg = (ImageView)rootView.findViewById(R.id.exhibit_detail_posterImg);
 
