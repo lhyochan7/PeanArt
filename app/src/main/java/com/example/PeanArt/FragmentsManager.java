@@ -121,6 +121,8 @@ public class FragmentsManager<var> extends AppCompatActivity {
                 if (view.getId() == R.id.cardView){
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("exhibition", exhibition);
+                    // review 등록시 user 파악하기 위해 uid도 같이 전송
+                    bundle.putString("uid", uid);
                     Log.i(TAG, exhibition.getId());
                     exhibitionDetailFragment.setArguments(bundle);
                     getSupportFragmentManager().beginTransaction().replace(R.id.mainLAY, exhibitionDetailFragment).commit();
