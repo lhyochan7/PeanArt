@@ -119,7 +119,8 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
                     System.out.println(longitude);
 
                     // 좌표(위도, 경도) 생성
-                    LatLng point = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude));
+                    LatLng point = new LatLng(Math.round(Double.parseDouble(latitude)*100)/100.0, Math.round(Double.parseDouble(longitude)*100)/100.0);
+
                     // 마커 생성
                     MarkerOptions mOptions2 = new MarkerOptions();
                     mOptions2.title("search result");
