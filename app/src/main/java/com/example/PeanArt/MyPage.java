@@ -7,12 +7,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -48,6 +50,8 @@ public class MyPage extends Fragment {
     ArrayList<User> mUserList;
     RecyclerView rcView_follow;
     followedUserAdapter mFollowAdapter;
+    Button btn_regist_exhibition;
+    private final int REGISTER_CODE = 878787;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,12 +69,22 @@ public class MyPage extends Fragment {
         fs = FirebaseFirestore.getInstance();
         profileImg = rootView.findViewById(R.id.mypage_profileImg);
         welcome_name = rootView.findViewById(R.id.mypage_welcome_name);
+        btn_regist_exhibition = rootView.findViewById(R.id.btn_regist_exhibition);
 
         mUserList = new ArrayList<User>();
         mFollowAdapter = new followedUserAdapter();
         rcView_follow = rootView.findViewById(R.id.mypage_rcView_followed);
         rcView_follow.setLayoutManager(new LinearLayoutManager(getActivity()));
         rcView_follow.setAdapter(mFollowAdapter);
+
+        btn_regist_exhibition.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent uidIntent = new Intent(getActivity(), RegisterGallery.class);
+                uidIntent.putExtra("uid", uid);
+                startActivity(uidIntent);
+            }
+        });
 
         LoadUserData();
         LoadFollowedUser();

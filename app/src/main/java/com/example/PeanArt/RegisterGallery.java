@@ -70,12 +70,17 @@ public class RegisterGallery extends AppCompatActivity {
     private int cnt = 1;
 
     //test variable
-    private String test_uid ="XW0VDeicIQWrVwYZAwPRPTXaySc2"; //MainPage?? 에서 userinfo 던져주세요
+
+    private String test_uid; //MainPage?? 에서 userinfo 던져주세요
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_gallery);
+
+        Intent uidIntent = getIntent();
+        test_uid = uidIntent.getStringExtra("uid");
+        Log.i(TAG, test_uid);
 
         //view finder
         input_image = findViewById(R.id.input_image);
@@ -204,7 +209,7 @@ public class RegisterGallery extends AppCompatActivity {
 
     private void image_upload_to_storage(String path){ //사진 firestorage upload function
         StorageReference storageRef = storage.getReference();
-        StorageReference riversRef = storageRef.child("Exhibition/"+path+"/"+"1");
+        StorageReference riversRef = storageRef.child("Exhibition/"+path+"/"+"poster.png");
         UploadTask uploadTask = riversRef.putFile(img_data);
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
