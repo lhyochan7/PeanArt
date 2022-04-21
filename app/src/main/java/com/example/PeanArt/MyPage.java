@@ -7,12 +7,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -44,6 +46,7 @@ public class MyPage extends Fragment {
     // User 프로필 사진 및 아이디 표시용 view
     private ImageView profileImg;
     private TextView welcome_name;
+    private Button btn_regist_exhibition;
     // Follow User Recycler View 용 Variable
     ArrayList<User> mUserList;
     RecyclerView rcView_follow;
@@ -65,7 +68,15 @@ public class MyPage extends Fragment {
         fs = FirebaseFirestore.getInstance();
         profileImg = rootView.findViewById(R.id.mypage_profileImg);
         welcome_name = rootView.findViewById(R.id.mypage_welcome_name);
-
+        btn_regist_exhibition = rootView.findViewById(R.id.btn_regist_exhibition);
+        btn_regist_exhibition.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent msg = new Intent(getActivity(),RegisterGallery.class);
+                msg.putExtra("uid", uid);
+                startActivity(msg);
+            }
+        });
         mUserList = new ArrayList<User>();
         mFollowAdapter = new followedUserAdapter();
         rcView_follow = rootView.findViewById(R.id.mypage_rcView_followed);

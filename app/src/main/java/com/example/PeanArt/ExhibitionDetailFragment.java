@@ -21,6 +21,7 @@ import com.bumptech.glide.Glide;
 import com.example.PeanArt.adapter.DetailAdapter;
 import com.example.PeanArt.adapter.ExhibitAdapter;
 import com.example.PeanArt.model.Exhibition;
+import com.example.PeanArt.model.Review;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -57,6 +58,7 @@ public class ExhibitionDetailFragment extends Fragment {
     private TextView detailTitleTXT, detailDateTXT, detailDescTXT;
     private Serializable detailExhibition;
     StorageReference storageRef;
+    FirebaseFirestore fs;
     ImageView exhibit_detail_posterImg;
     private int cnt;
     ArrayList<String> list;
@@ -96,7 +98,7 @@ public class ExhibitionDetailFragment extends Fragment {
             detailDesc = ((Exhibition) detailExhibition).getDetail();
         }
         Log.i(TAG, "Get Exhibition : " + detailTitle + detailDesc);
-
+        fs = FirebaseFirestore.getInstance();
     }
 
     @Override
@@ -149,36 +151,31 @@ public class ExhibitionDetailFragment extends Fragment {
                 });
 
 
-
         RecyclerView recyclerView = rootView.findViewById(R.id.exhibit_detail_recycler);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
         recyclerView.setLayoutManager(gridLayoutManager);
 //        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         DetailAdapter detailAdapter = new DetailAdapter(list);
         recyclerView.setAdapter(detailAdapter);
+
+
+
         return rootView;
     }
-
-//        fs.collection("exhibition").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                if(task.isSuccessful()){
-//                    for (DocumentSnapshot document : task.getResult()){
-//                        if(document.exists()){
-//                            Log.i(TAG, document.get("detail").toString());
-//                            Exhibition tmp = document.toObject(Exhibition.class);
-//                            Log.i(TAG, "Before SetID: " + tmp.getId());
-//                            tmp.setId(document.getId()); // 별도로 ID ( Exhibition의 Document ID ) 추가.
-//                            Log.i(TAG, "Get Exhibition ID : " + document.getId());
-//                            mExhibitList.add(tmp);
-//                        }
-//                    }
-//                    mDetailAdapter.setmExhibitList(mExhibitList);
-//                    mDetailAdapter.notifyDataSetChanged();
-//                } else {
-//                    Log.i(TAG, "Failed with: "+task.getException());
-//                }
-//            }
-//        });
-
+    public void loadReviews(){
+        ArrayList<Review> reviews = new ArrayList<Review>();
+        fs.collection("review").whereEqualTo("exhibitionID", detailID).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    for(DocumentSnapshot document : task.getResult()){
+                        if(document.exists()){
+                            Review tmp = document.toObject(Review.class);
+                            reviews.add(tmp);
+                        }
+                    }
+                }
+            }
+        });
+    }
 }
