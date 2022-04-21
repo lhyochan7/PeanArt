@@ -17,11 +17,13 @@
             android:id="@+id/mypage_profileImg"
             android:layout_width="150dp"
             android:layout_height="150dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="20dp"
             android:background="@drawable/rectanglebg"
             android:elevation="10dp"
-            app:srcCompat="@drawable/profilepic" />
+            android:padding="10dp"
+            app:srcCompat="@drawable/profileicon" />
 
         <Button
             android:id="@+id/btn_regist_exhibition"
