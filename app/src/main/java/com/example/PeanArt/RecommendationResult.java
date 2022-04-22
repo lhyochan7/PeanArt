@@ -37,6 +37,7 @@ public class RecommendationResult extends AppCompatActivity {
         topThree2 = (ImageView) findViewById(R.id.topThree2);
         topThree3 = (ImageView) findViewById(R.id.topThree3);
 
+
         topThree = new String[3];
 
         Intent topIntent = getIntent();
