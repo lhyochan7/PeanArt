@@ -100,7 +100,6 @@ public class FragmentsManager<var> extends AppCompatActivity {
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (view.getId() == R.id.cardView){
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("exhibition", exhibition);
                     // review 등록시 user 파악하기 위해 uid도 같이 전송
@@ -108,7 +107,6 @@ public class FragmentsManager<var> extends AppCompatActivity {
                     Log.i(TAG, exhibition.getId());
                     exhibitionDetailFragment.setArguments(bundle);
                     getSupportFragmentManager().beginTransaction().replace(R.id.mainLAY, exhibitionDetailFragment).commit();
-                }
             }
         };
     }
