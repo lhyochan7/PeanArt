@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.PeanArt.R;
-import com.example.PeanArt.model.Exhibition;
 import com.example.PeanArt.model.Review;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -20,19 +19,19 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class reviewAdapter extends RecyclerView.Adapter<reviewAdapter.ViewHolder> {
+public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder> {
     private ArrayList<Review> mReviewList;
     FirebaseFirestore fs = FirebaseFirestore.getInstance();
     @NonNull
     @Override
-    public reviewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ReviewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_detail_review, parent, false);
 
-        return new reviewAdapter.ViewHolder(view);
+        return new ReviewAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull reviewAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ReviewAdapter.ViewHolder holder, int position) {
         holder.onBind(mReviewList.get(position));
     }
     public void setmReviewList(ArrayList<Review> list){

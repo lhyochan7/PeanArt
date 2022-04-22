@@ -1,5 +1,6 @@
 package com.example.PeanArt;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -57,7 +58,7 @@ public class RegisterGallery extends AppCompatActivity {
     //firebase
     private FirebaseStorage storage; // 스토리지 접근하기 위한 인스턴스
     private FirebaseFirestore db;
-    private Uri img_data;
+    private ClipData clipdata;
 
     //const
     private final int GALLERY_CODE = 10; //갤러리 접근하기 위한 코드
@@ -167,7 +168,10 @@ public class RegisterGallery extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Log.d(TAG, "DocumentSnapshot successfully written!");
-                        image_upload_to_storage("gallery"+cnt); //fireStorage img update func
+                        image_upload_to_storage("gallery"+cnt,"poster.png",clipdata.getItemAt(0).getUri()); //fireStorage img update func
+                        for(int i =1; i <clipdata.getItemCount(); i++){
+                            image_upload_to_storage("gallery"+cnt,i+".png",clipdata.getItemAt(i).getUri()); //fireStorage img update func
+                        }
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -176,10 +180,12 @@ public class RegisterGallery extends AppCompatActivity {
                         Log.w(TAG, "Error adding document", e);
                     }
                 });
+        finish();
     }
 
     private void loadAlbum(){
-        Intent intent = new Intent(Intent.ACTION_PICK);
+        Intent intent = new Intent(Intent.ACTION_PICK,MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
         startActivityForResult(intent,GALLERY_CODE);
 
@@ -191,7 +197,7 @@ public class RegisterGallery extends AppCompatActivity {
 
         if(requestCode == GALLERY_CODE){
             try{
-                img_data = data.getData();
+                clipdata = data.getClipData();
                 InputStream in = getContentResolver().openInputStream(data.getData());
                 Bitmap img = BitmapFactory.decodeStream(in);
                 in.close();
@@ -207,10 +213,12 @@ public class RegisterGallery extends AppCompatActivity {
         }
     }
 
-    private void image_upload_to_storage(String path){ //사진 firestorage upload function
+    private void image_upload_to_storage(String path, String name, Uri upload_img){//사진 firestorage upload function
+
         StorageReference storageRef = storage.getReference();
-        StorageReference riversRef = storageRef.child("Exhibition/"+path+"/"+"poster.png");
-        UploadTask uploadTask = riversRef.putFile(img_data);
+        StorageReference riversRef = storageRef.child("Exhibition/"+path+"/"+name);
+        UploadTask uploadTask = riversRef.putFile(upload_img);
+
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
@@ -229,7 +237,7 @@ public class RegisterGallery extends AppCompatActivity {
     }
 
     //date picker func
-    public void showDatePicker(View view) {  //click event
+    public void showDatePicker(View view) { //click event
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getSupportFragmentManager(),"datePicker");
         view_focus = view;
