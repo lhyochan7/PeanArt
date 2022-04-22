@@ -34,16 +34,6 @@
             android:background="@color/main_bg"
             android:text="대구광역시" />
 
-        <Button
-            android:id="@+id/registerBTN"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginLeft="180dp"
-            android:gravity="right|center_vertical"
-            android:onClick="clickFunc"
-            android:text="Button" />
-
     </LinearLayout>
 
     <LinearLayout
