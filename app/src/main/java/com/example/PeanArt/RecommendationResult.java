@@ -21,10 +21,9 @@ public class RecommendationResult extends AppCompatActivity {
 
     private FirebaseStorage storage;
     private StorageReference storageRef;
-    private StorageReference recommendImgs;
 
 
-    int topThree [];
+    String topThree [];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,30 +32,31 @@ public class RecommendationResult extends AppCompatActivity {
 
         storage = FirebaseStorage.getInstance("gs://peanart-b433a.appspot.com/");
         storageRef = storage.getReference();
-        recommendImgs = storageRef.child("recommend_imgs/");
 
         topThree1 = (ImageView) findViewById(R.id.topThree1);
         topThree2 = (ImageView) findViewById(R.id.topThree2);
         topThree3 = (ImageView) findViewById(R.id.topThree3);
 
-        topThree = new int[3];
+        topThree = new String[3];
 
         Intent topIntent = getIntent();
-        topThree = topIntent.getIntArrayExtra("topThree");
-
-//        Bundle mybundle = getIntent().getExtras();
-//
-//        topThree = mybundle.getIntArray("topThree");
+        topThree = topIntent.getStringArrayExtra("topThree");
 
         Log.i("MainActivity2", "MAIN 2 -> Recieved" + topThree[1]);
 
         for(int i=0; i<topThree.length; i++) {
-            int id = topThree[i];
+            String path = topThree[i];
             int finalI = i;
 
-            Log.i("MainActivity2", "TOP THREE ID = " + id+".jpg");
+            Log.i("MainActivity2", "TOP THREE ID = " + path);
 
-            recommendImgs.child(id+".jpg").getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+            String arr [] = path.split("/");
+
+            String id = arr[2];
+
+            Log.i("MainActivigy2", "ID = " + id);
+
+            storageRef.child(path).getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
                 @Override
                 public void onComplete(@NonNull Task<Uri> task) {
                     if(task.isSuccessful()){

@@ -1,5 +1,6 @@
 package com.example.PeanArt;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +23,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.PeanArt.ml.EncodedModel224;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.ListResult;
@@ -49,12 +51,10 @@ public class Recommendation extends Fragment implements View.OnClickListener {
     String uid;
 
     // UI 선언
-    private TextView testTV;
     private EncodedModel224 model;
-    private Button aiBTN;
-    private ImageView imgVW, imageButton1, imageButton2, imageButton3, imageButton4, imageButton5, imageButton6;
+    private ImageView imageButton1, imageButton2, imageButton3, imageButton4, imageButton5, imageButton6;
     private LinearLayout loadingScreen, recommendScreen;
-
+    private TextView progressTV;
 
     // Firebase 선언
     private FirebaseStorage storage;
@@ -64,17 +64,15 @@ public class Recommendation extends Fragment implements View.OnClickListener {
 
 
     // 사용 변수들 선언
-    private java.util.Map<Integer, float[]> dataList;
+    private Map<String, float[]> dataList;
 
-    private Map<Integer, Float> dists;
+    private Map<String, Float> dists;
 
     private ByteBuffer byteBuffer;
-    private Integer idx;
-    private int topThree[];
-    private int loop_cnt;
-    private int imgCNT;
+    private String path;
+    private String topThree[];
+    private int loop_cnt, imgCNT, idx, total_cnt;
     private Set<Integer> imgIds;
-
 
 
     @Override
@@ -82,8 +80,9 @@ public class Recommendation extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.recomendation, container, false);
 
-
         // UI 선언
+        progressTV = (TextView) rootView.findViewById(R.id.progressTV);
+
         imageButton1 = (ImageView) rootView.findViewById(R.id.imageButton1);
         imageButton1.setDrawingCacheEnabled(true);
         imageButton2 = (ImageView) rootView.findViewById(R.id.imageButton2);
@@ -104,10 +103,10 @@ public class Recommendation extends Fragment implements View.OnClickListener {
         imageButton5.setOnClickListener(this);
         imageButton6.setOnClickListener(this);
 
-
+        // Firesbase Storage 초기 선언
         storage = FirebaseStorage.getInstance("gs://peanart-b433a.appspot.com/");
         storageRef = storage.getReference();
-        recommendImgs = storageRef.child("recommend_imgs/");
+        recommendImgs = storageRef.child("Exhibition/");
         imageChoices = storageRef.child("Recommendation_images/");
 
 
@@ -119,83 +118,148 @@ public class Recommendation extends Fragment implements View.OnClickListener {
         recommendScreen.setVisibility(View.GONE);
 
         // 변수 초기 선언
-        dataList = new HashMap<Integer, float[]>();
-        dists = new HashMap<Integer, Float>();
+        dataList = new HashMap<String, float[]>();
+        dists = new HashMap<String, Float>();
         byteBuffer = ByteBuffer.allocate(4 * 224 * 224 * 3);
-        topThree = new int[3];
+        topThree = new String[3];
         loop_cnt = 0;
+        total_cnt = 0;
         imgCNT = 1;
         imgIds = new LinkedHashSet<Integer>();
 
 
+        findNumPicinDatabase();
+        runModelonDatabase();
+        chooseRecommendImages();
+
+        return rootView;
+    }
+
+    public void findNumPicinDatabase() {
+        StorageReference listRef = FirebaseStorage.getInstance().getReference("/Exhibition");
+
+        listRef.listAll()
+                .addOnSuccessListener(new OnSuccessListener<ListResult>() {
+                    @Override
+                    public void onSuccess(ListResult listResult) {
+                        for (StorageReference prefix : listResult.getPrefixes()) {
+                            // All the prefixes under listRef.
+                            // You may call listAll() recursively on them.
+
+                            prefix.listAll().addOnSuccessListener(new OnSuccessListener<ListResult>() {
+                                @Override
+                                public void onSuccess(ListResult listResult) {
+                                    // 해당 폴더 파일들 모두 찾기
+                                    for (StorageReference item : listResult.getItems()) {
+                                        total_cnt++;
+                                    }
+                                }
+                            });
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // Uh-oh, an error occurred!
+                    }
+                });
+    }
+
+    public void runModelonDatabase() {
         // DB에 있는 사진들 모델에 돌리기
         try {
             model = EncodedModel224.newInstance(getContext());
-
-            recommendImgs
-                    .listAll()
+            StorageReference listRef = FirebaseStorage.getInstance().getReference("/Exhibition");
+            listRef.listAll()
                     .addOnSuccessListener(new OnSuccessListener<ListResult>() {
                         @Override
                         public void onSuccess(ListResult listResult) {
+                            progressTV.setText(loop_cnt + " / " + total_cnt);
 
-                            for (StorageReference item : listResult.getItems()) {
+                            Log.d(TAG, listRef.getName());
 
-                                item.getBytes(2048 * 2048)
-                                        .addOnSuccessListener(new OnSuccessListener<byte[]>() {
-                                            @Override
-                                            public void onSuccess(byte[] bytes) {
+                            // 폴더 이름 찾기
+                            for (StorageReference prefix : listResult.getPrefixes()) {
+                                Log.d(TAG, prefix.getName());
+                                // This will give you a folder name
+                                // You may call listAll() recursively on them.
 
-                                                idx = Integer.parseInt(item.getName().replace(".jpg", ""));
-                                                Log.i(TAG, "IDX = " + idx);
+                                prefix.listAll().addOnSuccessListener(new OnSuccessListener<ListResult>() {
+                                    @Override
+                                    public void onSuccess(ListResult listResult) {
 
-                                                byteBuffer.clear();
+                                        // 해당 폴더 파일들 모두 찾기
+                                        for (StorageReference item : listResult.getItems()) {
+                                            item.getBytes(4096 * 4096)
+                                                    .addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                                                        @Override
+                                                        public void onSuccess(byte[] bytes) {
+                                                            //idx = Integer.parseInt(item.getName().replace(".jpg", ""));
+                                                            path = item.getPath();
 
-                                                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                                                            if (path.contains("poster")) {
+                                                                // continue loop (skip)
+                                                            } else {
+                                                                Log.i(TAG, "PATH = " + path);
 
-                                                Bitmap resizedImg = Bitmap.createScaledBitmap(bitmap, 224, 224, true);
+                                                                byteBuffer.clear();
 
+                                                                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
 
-                                                //imgVW.destroyDrawingCache();   //destroy preview Created cache if any
-                                                //imgVW.buildDrawingCache();
-                                                //imgVW.setImageBitmap(resizedImg);
+                                                                Bitmap resizedImg = Bitmap.createScaledBitmap(bitmap, 224, 224, true);
 
-                                                resizedImg.copyPixelsToBuffer(byteBuffer);
+                                                                resizedImg.copyPixelsToBuffer(byteBuffer);
 
-                                                // Creates inputs for reference and load Buffer to bitmap
-                                                TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 224, 224, 3}, DataType.FLOAT32);
-                                                inputFeature0.loadBuffer(byteBuffer);
+                                                                // Creates inputs for reference and load Buffer to bitmap
+                                                                TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 224, 224, 3}, DataType.FLOAT32);
+                                                                inputFeature0.loadBuffer(byteBuffer);
 
-                                                // Runs model inference and gets result.
-                                                EncodedModel224.Outputs outputs = model.process(inputFeature0);
-                                                TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
+                                                                // Runs model inference and gets result.
+                                                                EncodedModel224.Outputs outputs = model.process(inputFeature0);
+                                                                TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
 
-                                                // Get predicted feature values
-                                                float[] data = outputFeature0.getFloatArray();
+                                                                // Get predicted feature values
+                                                                float[] data = outputFeature0.getFloatArray();
 
-                                                normalize(data);
+                                                                normalize(data);
 
-                                                Log.i(TAG, "Data Value = " + data[100]);
+                                                                Log.i(TAG, "Data Value = " + data[100]);
 
-                                                dataList.put(idx, data);
+                                                                dataList.put(path, data);
 
-                                                loop_cnt++;
+                                                                Log.i(TAG, "LOOP_CNT = " + loop_cnt);
+                                                            }
+                                                            loop_cnt++;
 
-                                                Log.i(TAG, "LOOP_CNT = " + loop_cnt);
+                                                            progressTV.setText(loop_cnt + " / " + total_cnt);
 
-                                                if (loop_cnt == listResult.getItems().size()) {
-                                                    loadingScreen.setVisibility(View.GONE);
-                                                    recommendScreen.setVisibility(View.VISIBLE);
-                                                }
-                                            }
-                                        });
+                                                            if ((loop_cnt >= total_cnt) && total_cnt != 0) {
+                                                                loadingScreen.setVisibility(View.GONE);
+                                                                recommendScreen.setVisibility(View.VISIBLE);
+                                                            }
+
+                                                        }
+                                                    });
+                                        }
+                                    }
+                                });
                             }
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            // Uh-oh, an error occurred!
                         }
                     });
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
+    public void chooseRecommendImages() {
         // Recommendation Image 넣기
         Random rand = new Random();
 
@@ -216,7 +280,7 @@ public class Recommendation extends Fragment implements View.OnClickListener {
                                         @RequiresApi(api = Build.VERSION_CODES.N)
                                         @Override
                                         public void onSuccess(byte[] bytes) {
-                                            idx = Integer.parseInt(item.getName().replace(".jpg", ""));
+                                            idx = Integer.parseInt(item.getName().replace(".png", ""));
                                             Log.i(TAG, "IDX = " + idx);
 
                                             if (imgIds.contains(idx)) {
@@ -253,8 +317,8 @@ public class Recommendation extends Fragment implements View.OnClickListener {
                     }
                 });
 
-        return rootView;
     }
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -283,7 +347,7 @@ public class Recommendation extends Fragment implements View.OnClickListener {
         for (int i = 0; i < v1.length; i++) {
             //Log.i("MainActivity", String.format("v1 = %.5f", v1[i]));
             //Log.i("MainActivity", String.format("v2 = %.5f", v2[i]));
-            sum += (v1[i] - v2[i]); //* (v1[i] - v2[i]);
+            sum += (v1[i] - v2[i]) * (v1[i] - v2[i]);
         }
         return (float) Math.sqrt(sum);
     }
@@ -312,12 +376,13 @@ public class Recommendation extends Fragment implements View.OnClickListener {
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onClick(View view) {
-        byteBuffer.clear();
         Bitmap image;
         Bitmap resizedImg;
 
         switch (view.getId()) {
             case R.id.imageButton1:
+                byteBuffer.clear();
+
                 imageButton1.destroyDrawingCache();   //destroy preview Created cache if any
                 imageButton1.buildDrawingCache();
 
@@ -328,6 +393,8 @@ public class Recommendation extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.imageButton2:
+                byteBuffer.clear();
+
                 imageButton2.destroyDrawingCache();   //destroy preview Created cache if any
                 imageButton2.buildDrawingCache();
 
@@ -338,6 +405,8 @@ public class Recommendation extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.imageButton3:
+                byteBuffer.clear();
+
                 imageButton3.destroyDrawingCache();   //destroy preview Created cache if any
                 imageButton3.buildDrawingCache();
 
@@ -348,6 +417,8 @@ public class Recommendation extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.imageButton4:
+                byteBuffer.clear();
+
                 imageButton4.destroyDrawingCache();   //destroy preview Created cache if any
                 imageButton4.buildDrawingCache();
 
@@ -358,6 +429,8 @@ public class Recommendation extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.imageButton5:
+                byteBuffer.clear();
+
                 imageButton5.destroyDrawingCache();   //destroy preview Created cache if any
                 imageButton5.buildDrawingCache();
 
@@ -368,6 +441,8 @@ public class Recommendation extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.imageButton6:
+                byteBuffer.clear();
+
                 imageButton6.destroyDrawingCache();   //destroy preview Created cache if any
                 imageButton6.buildDrawingCache();
 
@@ -393,22 +468,21 @@ public class Recommendation extends Fragment implements View.OnClickListener {
         normalize(inputData);
 
         // get Eucledian Distance and top Three recommendation images
-        dists = new HashMap<Integer, Float>();
+        dists = new HashMap<String, Float>();
 
-        for (Integer key : dataList.keySet()) {
-
-            Log.i(TAG, "key = " + key);
-
+        for (String key : dataList.keySet()) {
             dists.put(key, getEuclideanDistance(dataList.get(key), inputData));
         }
 
-        List<Map.Entry<Integer, Float>> list = new ArrayList<>(dists.entrySet());
+        List<Map.Entry<String, Float>> list = new ArrayList<>(dists.entrySet());
         list.sort(Map.Entry.comparingByValue());
 
 
         for (int i = 0; i < 3; i++) {
-            Map.Entry<Integer, Float> a = list.get(i);
+            Map.Entry<String, Float> a = list.get(i);
             topThree[i] = a.getKey();
+
+            Log.i(TAG, "topThree[" + i + "] = " + a.getValue());
         }
 
         for (int i = 0; i < topThree.length; i++) {
