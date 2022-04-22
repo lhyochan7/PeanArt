@@ -29,8 +29,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.ListResult;
@@ -38,6 +40,7 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.Serializable;
 import java.lang.reflect.Array;
+import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -189,14 +192,16 @@ public class ExhibitionDetailFragment extends Fragment {
                 }else{
                     Map<String, Object> review = new HashMap<>();
                     review.put("writerID", uid);
+                    review.put("exhibitionID", detailID);
                     review.put("content", editTXT_review.getText().toString().trim());
                     Date date = new Date(System.currentTimeMillis());
-                    String getTime = new SimpleDateFormat("yyyy/MM/dd").format(date);
-                    review.put("writeDate", getTime);
+                    // String getTime = new SimpleDateFormat("yyyy/MM/dd").format(date);
+                    review.put("writeDate", new Timestamp(date));
                     fs.collection("review").document().set(review).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
                             Log.i(TAG, "Review successfully written! ");
+                            editTXT_review.setText("");
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -220,7 +225,8 @@ public class ExhibitionDetailFragment extends Fragment {
         return rootView;
     }
     public void loadReviews(){
-        fs.collection("review").whereEqualTo("exhibitionID", detailID).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        mReviewList.clear();
+        fs.collection("review").whereEqualTo("exhibitionID", detailID).orderBy("writeDate").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
@@ -231,6 +237,7 @@ public class ExhibitionDetailFragment extends Fragment {
                                 Log.i(TAG, "document is empty!");
                                 continue;
                             }
+                            Log.i(TAG, "리뷰 내용: " + document.get("content"));
                             Review tmp = document.toObject(Review.class);
                             mReviewList.add(tmp);
                         }

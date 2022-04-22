@@ -1,12 +1,15 @@
 package com.example.PeanArt.model;
 
+import com.google.firebase.Timestamp;
+
 public class Review {
-    String writerID, exhibitionID, content, writeDate;
+    String writerID, exhibitionID, content;
+    Timestamp writeDate;
 
     public Review() {
     }
 
-    public Review(String writerID, String exhibitionID, String content, String writeDate) {
+    public Review(String writerID, String exhibitionID, String content, Timestamp writeDate) {
         this.writerID = writerID;
         this.exhibitionID = exhibitionID;
         this.content = content;
@@ -37,11 +40,11 @@ public class Review {
         this.content = content;
     }
 
-    public String getWriteDate() {
+    public Timestamp getWriteDate() {
         return writeDate;
     }
 
-    public void setWriteDate(String writeDate) {
+    public void setWriteDate(Timestamp writeDate) {
         this.writeDate = writeDate;
     }
 }

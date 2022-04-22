@@ -17,6 +17,8 @@ import com.google.firebase.firestore.FieldPath;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder> {
@@ -45,6 +47,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
     }
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView TxtNickname, TxtContent, TxtDate;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             TxtNickname = itemView.findViewById(R.id.txt_review_nickname);
@@ -63,7 +66,9 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
                 }
             });
             TxtContent.setText(review.getContent());
-            TxtDate.setText(review.getWriteDate());
+            // Timestamp -> Date ( timestamp.toDate() )
+            // Date -> String ( dateFormat.format(Date) ) 타입 변환 후 setText
+            TxtDate.setText(dateFormat.format(review.getWriteDate().toDate()));
         }
     }
 }
