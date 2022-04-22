@@ -92,7 +92,7 @@ public class recommendationResultFragment extends Fragment {
         topThree1 = (ImageView) rootView.findViewById(R.id.topThree1);
         topThree2 = (ImageView) rootView.findViewById(R.id.topThree2);
         topThree3 = (ImageView) rootView.findViewById(R.id.topThree3);
-
+        idList = new ArrayList<>();
 
         Log.i("MainActivity2", "MAIN 2 -> Recieved" + topThree[1]);
         ImageView[] viewList = {topThree1, topThree2, topThree3};
@@ -139,7 +139,9 @@ public class recommendationResultFragment extends Fragment {
                         for(DocumentSnapshot document : task.getResult()){
                             if(document.exists()){
                                 Exhibition tmp = document.toObject(Exhibition.class);
+                                tmp.setId(document.getId());
                                 viewList[finalI].setOnClickListener(((FragmentsManager)getActivity()).exhibitDetailListener(tmp));
+                                Log.i("TAG", "onComplete: " + finalI + ", " + tmp.getId());
                             }
                         }
                     }
