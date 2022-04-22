@@ -26,4 +26,6 @@
     <string name="loading">모델 로딩중입니다!</string>
     <string name="chooseIMG">마음에 드는 그림을 골라주세요!</string>
 
+    <string name="please_leave_review">방문하신 전시회가 어땠는지 리뷰를 남겨주세요.</string>
+    <string name="regist_review">리뷰 등록</string>
 </resources>

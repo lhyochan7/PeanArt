@@ -6,27 +6,46 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.PeanArt.adapter.DetailAdapter;
+import com.example.PeanArt.adapter.ExhibitAdapter;
+import com.example.PeanArt.adapter.ReviewAdapter;
 import com.example.PeanArt.model.Exhibition;
+import com.example.PeanArt.model.Review;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.ListResult;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
+import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -48,9 +67,18 @@ public class ExhibitionDetailFragment extends Fragment {
     private TextView detailTitleTXT, detailDateTXT, detailDescTXT,exhibit_detail_location;
     private Serializable detailExhibition;
     StorageReference storageRef;
+    FirebaseFirestore fs;
     ImageView exhibit_detail_posterImg;
     private int cnt;
     ArrayList<String> list;
+    private String uid;
+    //Review 등록 용 variable
+    private EditText editTXT_review;
+    private Button btn_detail_registReview;
+    //Review 표시 용 variable
+    ArrayList<Review> mReviewList;
+    RecyclerView rcView_review;
+    ReviewAdapter mReviewAdapter;
 
     public ExhibitionDetailFragment() {
         // Required empty public constructor
@@ -85,9 +113,11 @@ public class ExhibitionDetailFragment extends Fragment {
             startDate = ((Exhibition) detailExhibition).getStartDate();
             endDate = ((Exhibition) detailExhibition).getEndDate();
             detailDesc = ((Exhibition) detailExhibition).getDetail();
+            uid = getArguments().getString("uid");
             location = ((Exhibition) detailExhibition).getLocation();
         }
         Log.i(TAG, "Get Exhibition : " + detailTitle + detailDesc);
+        fs = FirebaseFirestore.getInstance();
 
     }
 
@@ -143,36 +173,79 @@ public class ExhibitionDetailFragment extends Fragment {
                 });
 
 
-
         RecyclerView recyclerView = rootView.findViewById(R.id.exhibit_detail_recycler);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
         recyclerView.setLayoutManager(gridLayoutManager);
 //        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         DetailAdapter detailAdapter = new DetailAdapter(list);
         recyclerView.setAdapter(detailAdapter);
+
+        // Review 등록용 editText 및 button 세팅
+        editTXT_review = rootView.findViewById(R.id.editTXT_review);
+        btn_detail_registReview = rootView.findViewById(R.id.btn_detail_registReview);
+        btn_detail_registReview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Review 입력칸이 비어 있을경우 등록 X
+                if(editTXT_review.getText().toString().length() == 0){
+                    Toast.makeText(getContext(), "리뷰 내용이 비어있습니다.", Toast.LENGTH_SHORT).show();
+                }else{
+                    Map<String, Object> review = new HashMap<>();
+                    review.put("writerID", uid);
+                    review.put("exhibitionID", detailID);
+                    review.put("content", editTXT_review.getText().toString().trim());
+                    Date date = new Date(System.currentTimeMillis());
+                    // String getTime = new SimpleDateFormat("yyyy/MM/dd").format(date);
+                    review.put("writeDate", new Timestamp(date));
+                    fs.collection("review").document().set(review).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            Log.i(TAG, "Review successfully written! ");
+                            editTXT_review.setText("");
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.i(TAG, "Error writing document ", e);
+                        }
+                    });
+                    loadReviews();
+                }
+            }
+        });
+
+        // Review Recyclerview 용 variable 초기화
+        mReviewList = new ArrayList<Review>();
+        rcView_review = rootView.findViewById(R.id.rcView_review);
+        rcView_review.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mReviewAdapter = new ReviewAdapter();
+        rcView_review.setAdapter(mReviewAdapter);
+
+        loadReviews();
         return rootView;
     }
-
-//        fs.collection("exhibition").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                if(task.isSuccessful()){
-//                    for (DocumentSnapshot document : task.getResult()){
-//                        if(document.exists()){
-//                            Log.i(TAG, document.get("detail").toString());
-//                            Exhibition tmp = document.toObject(Exhibition.class);
-//                            Log.i(TAG, "Before SetID: " + tmp.getId());
-//                            tmp.setId(document.getId()); // 별도로 ID ( Exhibition의 Document ID ) 추가.
-//                            Log.i(TAG, "Get Exhibition ID : " + document.getId());
-//                            mExhibitList.add(tmp);
-//                        }
-//                    }
-//                    mDetailAdapter.setmExhibitList(mExhibitList);
-//                    mDetailAdapter.notifyDataSetChanged();
-//                } else {
-//                    Log.i(TAG, "Failed with: "+task.getException());
-//                }
-//            }
-//        });
-
+    public void loadReviews(){
+        mReviewList.clear();
+        fs.collection("review").whereEqualTo("exhibitionID", detailID).orderBy("writeDate").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    for(DocumentSnapshot document : task.getResult()){
+                        if(document.exists()){
+                            // 리뷰가 비어있으면 표시하지 않고 다음 리뷰 불러옴
+                            if(document.getData().size() == 0){
+                                Log.i(TAG, "document is empty!");
+                                continue;
+                            }
+                            Log.i(TAG, "리뷰 내용: " + document.get("content"));
+                            Review tmp = document.toObject(Review.class);
+                            mReviewList.add(tmp);
+                        }
+                    }
+                    mReviewAdapter.setmReviewList(mReviewList);
+                    mReviewAdapter.notifyDataSetChanged();
+                }
+            }
+        });
+    }
 }

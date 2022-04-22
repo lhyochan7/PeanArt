@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.PeanArt.adapter.ExhibitAdapter;
 import com.example.PeanArt.adapter.followedUserAdapter;
+import com.example.PeanArt.adapter.visitedExhibitAdapter;
 import com.example.PeanArt.model.Exhibition;
 import com.example.PeanArt.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -35,6 +36,7 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 public class MyPage extends Fragment {
@@ -51,6 +53,10 @@ public class MyPage extends Fragment {
     RecyclerView rcView_follow;
     followedUserAdapter mFollowAdapter;
     Button btn_regist_exhibition;
+    // Visited Exhibition Recycler View 용 Variable
+    ArrayList<String> mExhibitionIdList;
+    RecyclerView rcView_visited;
+    visitedExhibitAdapter mVisitedAdapter;
     private final int REGISTER_CODE = 878787;
 
     @Override
@@ -77,6 +83,12 @@ public class MyPage extends Fragment {
         rcView_follow.setLayoutManager(new LinearLayoutManager(getActivity()));
         rcView_follow.setAdapter(mFollowAdapter);
 
+        mExhibitionIdList = new ArrayList<>();
+        mVisitedAdapter = new visitedExhibitAdapter();
+        rcView_visited = rootView.findViewById(R.id.mypage_rcView_visited);
+        rcView_visited.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rcView_visited.setAdapter(mVisitedAdapter);
+
         btn_regist_exhibition.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,6 +100,7 @@ public class MyPage extends Fragment {
 
         LoadUserData();
         LoadFollowedUser();
+        LoadVisitedExhibition();
         return rootView;
     }
     public void LoadUserData(){
@@ -153,6 +166,26 @@ public class MyPage extends Fragment {
     }
 
     public void LoadVisitedExhibition(){
+        fs.collection("review").whereEqualTo("writerID", uid).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    for(DocumentSnapshot document : task.getResult()){
+                        if(document.exists()){
+                            // 현재 회원이 방문한 ( 리뷰남긴 ) 전시회 목록
+                            String visitedExhibitionID = (String) document.get("exhibitionID");
+                            Log.i(TAG, "visited Exhibition: " + visitedExhibitionID);
+                            if(!mExhibitionIdList.contains(visitedExhibitionID))
+                                mExhibitionIdList.add(visitedExhibitionID);
+                            }
+                        }
+                    mVisitedAdapter.setmVisitedExhibitList(mExhibitionIdList);
+                    mVisitedAdapter.notifyDataSetChanged();
+                    }
+                else {
+                }
+            }
+        });
     }
     public void SetProfileImg(User user){
         StorageReference storageRef = FirebaseStorage.getInstance("gs://peanart-b433a.appspot.com/").getReference();
