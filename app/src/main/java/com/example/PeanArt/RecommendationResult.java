@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,6 +22,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class RecommendationResult extends AppCompatActivity {
 
@@ -55,7 +57,7 @@ public class RecommendationResult extends AppCompatActivity {
         topThree = topIntent.getStringArrayExtra("topThree");
 
         Log.i("MainActivity2", "MAIN 2 -> Recieved" + topThree[1]);
-
+        ImageView[] viewList = { topThree1, topThree2, topThree3 };
         for (int i = 0; i < topThree.length; i++) {
             String path = topThree[i];
             int finalI = i;
@@ -92,13 +94,14 @@ public class RecommendationResult extends AppCompatActivity {
                 }
             });
 
-            fs.collection("exhibition").whereIn(FieldPath.documentId(), idList).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            fs.collection("exhibition").whereEqualTo(FieldPath.documentId(), id).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                     if(task.isSuccessful()){
                         for(DocumentSnapshot document : task.getResult()){
                             if(document.exists()){
                                 Exhibition tmp = document.toObject(Exhibition.class);
+                                viewList[finalI].setOnClickListener(new FragmentsManager().exhibitDetailListener(tmp));
                             }
                         }
                     }
