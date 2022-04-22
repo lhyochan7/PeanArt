@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <TextView
             android:id="@+id/textView"
@@ -27,6 +27,15 @@
             android:gravity="center"
             android:text="@string/loading"
             android:textSize="34sp" />
+
+        <TextView
+            android:id="@+id/progressTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:gravity="center"
+            android:textSize="24sp"
+            tools:text="Progress" />
 
         <ProgressBar
             android:layout_width="match_parent"

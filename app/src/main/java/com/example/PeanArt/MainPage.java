@@ -43,7 +43,7 @@ public class MainPage extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle bundle = getArguments();
-        if(bundle != null){
+        if (bundle != null) {
             uid = bundle.getString("uid");
         }
         fs = FirebaseFirestore.getInstance();
@@ -53,7 +53,7 @@ public class MainPage extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.fragment_main_recycler, container, false);
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_main_recycler, container, false);
         mExhibitList = new ArrayList<Exhibition>();
         rcView = rootView.findViewById(R.id.rcView_main);
         rcView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -68,7 +68,7 @@ public class MainPage extends Fragment {
         kindsClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                switch (view.getId()){
+                switch (view.getId()) {
                     case R.id.btn_main_all:
                         searchTrigger = 0;
                         break;
@@ -93,12 +93,13 @@ public class MainPage extends Fragment {
         setRecyclerview();
         return rootView;
     }
-    public void setRecyclerview(){
+
+    public void setRecyclerview() {
         Task<QuerySnapshot> res;
         // recyclerView Adapter의 User Array 초기화
         mExhibitList.clear();
         //SearchTrigger => 0 : 전체 / 1 : 대학 전시회 / 2: 개인 전시회 / 3 : 기타
-        switch (searchTrigger){
+        switch (searchTrigger) {
             case 1:
                 res = fs.collection("exhibition").whereEqualTo("kind", 1).get();
                 break;
@@ -115,28 +116,29 @@ public class MainPage extends Fragment {
         fs.collection("test_users").document(uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful()){
-                    if(task.getResult().exists()){
+                if (task.isSuccessful()) {
+                    if (task.getResult().exists()) {
                         ArrayList<String> likedList = (ArrayList<String>) task.getResult().get("liked");
                         // liked list가 비어있을 경우
-                        boolean isLikedListEmpty = likedList==null;
+                        boolean isLikedListEmpty = likedList == null;
                         Log.i(TAG, "isLikedListEmpty" + isLikedListEmpty);
                         res.addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if(task.isSuccessful()){
-                                    for (DocumentSnapshot document : task.getResult()){
-                                        if(document.exists()){
+                                if (task.isSuccessful()) {
+                                    for (DocumentSnapshot document : task.getResult()) {
+                                        if (document.exists()) {
                                             // 전시회 내용이 비어있으면 표시하지 않고 다음 전시회 불러옴
-                                            if(document.getData().size() == 0){
+                                            if (document.getData().size() == 0) {
                                                 Log.i(TAG, "document is empty!");
                                                 continue;
                                             }
                                             Log.i(TAG, document.get("detail").toString());
                                             Exhibition tmp = document.toObject(Exhibition.class);
                                             tmp.setId(document.getId()); // 별도로 ID ( Exhibition의 Document ID ) 추가.
-                                            if(!isLikedListEmpty){
-                                                if(likedList.contains(tmp.getId())) tmp.setLiked(true);
+                                            if (!isLikedListEmpty) {
+                                                if (likedList.contains(tmp.getId()))
+                                                    tmp.setLiked(true);
                                             }
                                             mExhibitList.add(tmp);
                                         }
@@ -144,12 +146,12 @@ public class MainPage extends Fragment {
                                     mExhibitAdapter.setmExhibitList(mExhibitList);
                                     mExhibitAdapter.notifyDataSetChanged();
                                 } else {
-                                    Log.i(TAG, "Failed with: "+task.getException());
+                                    Log.i(TAG, "Failed with: " + task.getException());
                                 }
                             }
                         });
                     }
-                }else{
+                } else {
 
                 }
             }
