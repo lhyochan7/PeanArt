@@ -489,8 +489,11 @@ public class Recommendation extends Fragment implements View.OnClickListener {
             Log.i(TAG, "topThree[" + i + "] = " + topThree[i]);
         }
 
-        Intent intent = new Intent(getActivity(), RecommendationResult.class);
-        intent.putExtra("topThree", topThree);
-        startActivity(intent);
+        recommendationResultFragment resultFragment = new recommendationResultFragment();
+        Bundle bundle = new Bundle();
+        bundle.putStringArray("topThree", topThree);
+        bundle.putString("uid", uid);
+        resultFragment.setArguments(bundle);
+        ((FragmentsManager)getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.mainLAY, resultFragment);
     }
 }
