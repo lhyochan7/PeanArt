@@ -28,4 +28,5 @@
 
     <string name="please_leave_review">방문하신 전시회가 어땠는지 리뷰를 남겨주세요.</string>
     <string name="regist_review">리뷰 등록</string>
+    <string name="logout">로그아웃</string>
 </resources>
