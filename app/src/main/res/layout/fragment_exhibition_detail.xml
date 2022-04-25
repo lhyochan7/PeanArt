@@ -38,7 +38,6 @@
                     android:id="@+id/exhibit_detail_location"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:text="대구광역시" />
             </LinearLayout>
 
@@ -54,7 +53,7 @@
                 android:id="@+id/exhibit_detail_posterImg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                 />
+                />
 
             <View
                 android:id="@+id/divider3"
@@ -102,7 +101,8 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/exhibit_detail_recycler"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                >
 
             </androidx.recyclerview.widget.RecyclerView>
 
@@ -110,7 +110,6 @@
                 android:id="@+id/editTXT_review"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:background="@drawable/border_bk"
                 android:ems="10"
                 android:hint="@string/please_leave_review"
@@ -129,7 +128,8 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rcView_review"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                />
         </LinearLayout>
     </ScrollView>
     <!-- TODO: Update blank fragment layout -->
