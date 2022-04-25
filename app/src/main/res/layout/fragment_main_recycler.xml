@@ -22,7 +22,8 @@
             android:layout_height="30dp"
             android:layout_margin="5dp"
             android:onClick="locate"
-            app:srcCompat="@drawable/point" />
+            app:srcCompat="@drawable/point"
+            tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
         <TextView
             android:id="@+id/textView5"
@@ -51,8 +52,11 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_weight="1"
+            android:elevation="20dp"
             android:text="@string/cat_all"
+            android:textColor="@color/light_purple_BTN"
             android:textSize="10sp"
+            android:textStyle="bold"
             app:cornerRadius="20dp" />
 
         <Button
@@ -62,8 +66,11 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_weight="1"
+            android:elevation="20dp"
             android:text="@string/cat_univ"
-            android:textSize="9sp"
+            android:textColor="@color/light_purple_BTN"
+            android:textSize="10sp"
+            android:textStyle="bold"
             app:cornerRadius="20dp" />
 
         <Button
@@ -73,8 +80,11 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_weight="1"
+            android:elevation="20dp"
             android:text="@string/cat_ind"
-            android:textSize="9sp"
+            android:textColor="@color/light_purple_BTN"
+            android:textSize="10sp"
+            android:textStyle="bold"
             app:cornerRadius="20dp" />
 
         <Button
@@ -84,8 +94,11 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_weight="1"
+            android:elevation="20dp"
             android:text="@string/cat_else"
+            android:textColor="@color/light_purple_BTN"
             android:textSize="10sp"
+            android:textStyle="bold"
             app:cornerRadius="20dp" />
 
     </LinearLayout>
