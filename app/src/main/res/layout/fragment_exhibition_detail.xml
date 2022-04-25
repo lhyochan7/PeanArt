@@ -88,6 +88,7 @@
                 android:id="@+id/exhibit_detail_descript"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
                 android:text="거미줄을 의미하는 드림캐쳐의 문앙을 피어나는 꽃으로 표현" />
 
             <LinearLayout
@@ -123,7 +124,10 @@
                 android:id="@+id/btn_detail_registReview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/regist_review" />
+                android:text="@string/regist_review"
+                android:textColor="@color/light_purple_BTN"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rcView_review"

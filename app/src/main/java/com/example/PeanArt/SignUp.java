@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -95,7 +96,9 @@ public class SignUp extends AppCompatActivity {
     public void user_add_func(String uid, String nick){
         Log.i(TAG,uid+" / "+nick);
         Map<String, Object> user_input = new HashMap<>();
-        user_input.put("NICK", nick);
+        user_input.put("nickname", nick);
+        user_input.put("liked", new ArrayList<String>());
+        user_input.put("follow", new ArrayList<String>());
 
         db.collection("test_users").document(uid)
                 .set(user_input)

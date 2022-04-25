@@ -37,14 +37,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:text="@string/logout" />
+                android:text="@string/logout"
+                android:textColor="@color/light_purple_BTN"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/btn_regist_exhibition"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/regist_exhibition" />
+                android:text="@string/regist_exhibition"
+                android:textColor="@color/light_purple_BTN"
+                android:textStyle="bold" />
         </LinearLayout>
 
     </LinearLayout>
