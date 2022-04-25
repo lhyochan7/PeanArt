@@ -1,5 +1,7 @@
 package com.example.PeanArt;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -42,6 +44,13 @@ public class FragmentsManager<var> extends AppCompatActivity {
         setContentView(R.layout.activity_fragment);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setItemIconTintList(new ColorStateList(new int[][]{
+                new int[]{-android.R.attr.state_checked},
+                new int[]{android.R.attr.state_checked}
+        }, new int[]{
+                Color.parseColor("#BDBDBD"),
+                Color.parseColor("#5533EA")
+        }));
         bottomNavigationView.setOnNavigationItemSelectedListener(new ItemSelectedListener());
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
