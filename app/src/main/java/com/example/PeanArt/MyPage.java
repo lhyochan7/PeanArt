@@ -48,11 +48,11 @@ public class MyPage extends Fragment {
     // User 프로필 사진 및 아이디 표시용 view
     private ImageView profileImg;
     private TextView welcome_name;
+    Button btn_regist_exhibition, btn_logout;
     // Follow User Recycler View 용 Variable
     ArrayList<User> mUserList;
     RecyclerView rcView_follow;
     followedUserAdapter mFollowAdapter;
-    Button btn_regist_exhibition;
     // Visited Exhibition Recycler View 용 Variable
     ArrayList<String> mExhibitionIdList;
     RecyclerView rcView_visited;
@@ -76,7 +76,14 @@ public class MyPage extends Fragment {
         profileImg = rootView.findViewById(R.id.mypage_profileImg);
         welcome_name = rootView.findViewById(R.id.mypage_welcome_name);
         btn_regist_exhibition = rootView.findViewById(R.id.btn_regist_exhibition);
-
+        btn_logout = rootView.findViewById(R.id.btn_logout);
+        btn_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().finish();
+                startActivity(new Intent(getActivity(), Login.class));
+            }
+        });
         mUserList = new ArrayList<User>();
         mFollowAdapter = new followedUserAdapter();
         rcView_follow = rootView.findViewById(R.id.mypage_rcView_followed);
