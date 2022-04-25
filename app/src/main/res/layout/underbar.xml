@@ -16,9 +16,11 @@
         android:id="@+id/bottomNavigationView"
         android:layout_width="0dp"
         android:layout_height="56dp"
+        app:itemIconTint="@drawable/menu_selector_color"
+        app:itemTextColor="@color/purple_200"
+        app:labelVisibilityMode="unlabeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/menu_bottomnavigationview"
-        app:labelVisibilityMode="unlabeled"/>
+        app:menu="@menu/menu_bottomnavigationview" />
 </androidx.constraintlayout.widget.ConstraintLayout>
