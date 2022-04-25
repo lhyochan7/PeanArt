@@ -21,7 +21,7 @@
         android:id="@+id/edit_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_margin="10dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:hint="@string/email" />
@@ -30,7 +30,7 @@
         android:id="@+id/edit_pass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_margin="10dp"
         android:ems="10"
         android:inputType="textPassword"
         android:hint="@string/pwd" />
@@ -38,8 +38,8 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:backgroundTint="@color/white"
         android:text="로그인"
         android:textColor="@color/black"
@@ -48,15 +48,15 @@
     <com.google.android.gms.common.SignInButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_margin="10dp"
         android:id="@+id/signInButton"/>
     <TextView
         android:id="@+id/txt_password_lost"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
         android:gravity="right"
         android:text="비밀번호를 잊어 버리셨나요?" />
 
@@ -64,8 +64,8 @@
         android:id="@+id/go_signTXT"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:gravity="right"
         android:onClick="go_sign"
         android:text="아직 회원이 아니신가요?" />
